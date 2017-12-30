@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -14,6 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("signInScreen.fxml"));
         primaryStage.setTitle("Sign In");
+        int x = 6;
         primaryStage.setScene(new Scene(root, 1920, 1080));
         primaryStage.show();
     }
