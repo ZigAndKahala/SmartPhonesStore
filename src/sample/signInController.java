@@ -25,7 +25,7 @@ public class signInController {
         }
         Stage stage = (Stage) signIn.getScene().getWindow();
         Parent root = loader.load();
-        Scene scene = new Scene(root,1920,1080);
+        Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
         stage.setScene(scene);
     }
 
@@ -33,7 +33,7 @@ public class signInController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("signUp.fxml"));
         Stage stage = (Stage) signIn.getScene().getWindow();
         Parent root = loader.load();
-        Scene scene = new Scene(root,1920,1080);
+        Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
         stage.setScene(scene);
     }
 }

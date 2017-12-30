@@ -39,14 +39,12 @@ public class signUpController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("signInScreen.fxml"));
         Stage stage = (Stage) back.getScene().getWindow();
         Parent root = loader.load();
-        Scene scene = new Scene(root,1920,1080);
+        Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
         stage.setScene(scene);
     }
 
     public void signUp(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         DatabaseAPI databaseAPI = new DatabaseAPI();
-//        databaseAPI.write("insert INTO customer (cid, name, email, mobileNumber) VALUEs (1,\"Anas\",\"Anas\",050023456);");
-//        System.out.println("insert INTO customer (cid, name, email, mobileNumber) VALUEs (" + 0 + "," + name.getText() + "," + email.getText() + "," + Integer.parseInt(phoneNumber.getText()) + ");");
         databaseAPI.write("insert INTO customer (name, email,password,mobileNumber) VALUES ("+ "\"" + name.getText() + "\",\"" + email.getText() + "\",\"" + password.getText() + "\"," + Integer.parseInt(phoneNumber.getText()) + ");");
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

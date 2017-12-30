@@ -10,42 +10,26 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class Main extends Application {
+    static public int screenWidth;
+    static public int screenHeight;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //F U Anaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
+        screenWidth = screenSize.width;
+        screenHeight = screenSize.height - 30;
+
         Parent root = FXMLLoader.load(getClass().getResource("signInScreen.fxml"));
-        primaryStage.setTitle("Sign In");
-        int x = 6;
-        primaryStage.setScene(new Scene(root, 1920, 1080));
+        primaryStage.setTitle("Mobile Store");
+        primaryStage.setMaximized(true);
+        primaryStage.setScene(new Scene(root, screenWidth, screenHeight));
         primaryStage.show();
     }
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         launch(args);
-//        DatabaseAPI databaseAPI = new DatabaseAPI();
-//        System.out.println(databaseAPI.read("select name from customer;").getString("name"));
-//        databaseAPI.write("insert INTO customer (cid, name, email, mobileNumber) VALUEs (6,\"Anas\",\"Anas\",050023456);");
-//        refresh();
     }
-
-//    private static void refresh() {
-//        try {
-//            DatabaseAPI db = new DatabaseAPI();
-//            String sql = "Select * from customer";
-//
-//            ResultSet result = db.read(sql);
-//            StringBuilder emps = new StringBuilder();
-//            while(result.next()){
-//                emps.append(result.getString(1)).append("\t").append(result.getString(2)).append("\t").append(result.getString(3)).append("\n");
-//            }
-//            System.out.println(emps);
-//            db.connection.close();
-//            db.connection = null;
-//        } catch (ClassNotFoundException | SQLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
 }
