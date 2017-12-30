@@ -10,317 +10,324 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:controller="sample.customerController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-    <tabs>
-        <Tab text="phones">
-            <content>
-                <Pane prefHeight="1080.0" prefWidth="1920.0">
-                    <children>
-                        <Label layoutX="14.0" layoutY="26.0" prefHeight="59.0" prefWidth="304.0" text="choose phone ">
-                            <font>
-                                <Font size="41.0" />
-                            </font>
-                        </Label>
-                        <ComboBox layoutX="307.0" layoutY="44.0" prefHeight="34.0" prefWidth="214.0" />
-                        <Button layoutX="1120.0" layoutY="880.0" mnemonicParsing="false" text="Buy">
-                            <font>
-                                <Font size="39.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="1420.0" layoutY="880.0" mnemonicParsing="false" text="reserve">
-                            <font>
-                                <Font size="39.0" />
-                            </font>
-                        </Button>
-                        <ImageView fitHeight="424.0" fitWidth="320.0" layoutX="13.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="397.0" layoutY="201.0" prefHeight="40.0" prefWidth="171.0" text="Release Date">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <DatePicker layoutX="608.0" layoutY="209.0" />
-                        <TextField layoutX="650.0" layoutY="259.0" prefHeight="0.0" prefWidth="387.0" promptText="Weight, Thikness">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="650.0" layoutY="320.0" prefHeight="0.0" prefWidth="387.0" promptText="OS Version">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="650.0" layoutY="380.0" prefHeight="0.0" prefWidth="387.0" promptText="Storage, SD Slot">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1350.0" layoutY="259.0" prefHeight="50.0" prefWidth="262.0" promptText="Retial Price">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1350.0" layoutY="320.0" prefHeight="50.0" prefWidth="262.0" promptText="Wholesale Price">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="700.0" layoutY="675.0" prefHeight="50.0" prefWidth="262.0" promptText="Battery Capacity">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="700.0" layoutY="750.0" prefHeight="50.0" prefWidth="262.0" promptText="Battery Technology">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="700.0" layoutY="522.0" prefHeight="50.0" prefWidth="238.0" promptText="Screen Size In Inches">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="700.0" layoutY="597.0" prefHeight="50.0" prefWidth="238.0" promptText="Screen Size In Pixels">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1770.0" layoutY="257.0" prefHeight="50.0" prefWidth="143.0" promptText="Screen Size In Inches">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1770.0" layoutY="320.0" prefHeight="50.0" prefWidth="143.0" promptText="Screen Size In Inches">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1450.0" layoutY="522.0" prefHeight="50.0" prefWidth="325.0" promptText="Camera Photo Resolution MP">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1450.0" layoutY="597.0" prefHeight="50.0" prefWidth="325.0" promptText="Camera Video Resolution P">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1350.0" layoutY="380.0" prefHeight="50.0" prefWidth="262.0" promptText="Quantity">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="880.0" layoutY="100.0" prefHeight="50.0" prefWidth="272.0" promptText="Name Of Phone">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <TextField layoutX="1450.0" layoutY="100.0" prefHeight="0.0" prefWidth="387.0" promptText="Phone Version">
-                            <font>
-                                <Font size="23.0" />
-                            </font>
-                        </TextField>
-                        <Label layoutX="600.0" layoutY="100.0" prefHeight="50.0" prefWidth="248.0" text="Name Of Phone">
-                            <font>
-                                <Font size="34.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1200.0" layoutY="100.0" prefHeight="50.0" prefWidth="248.0" text="Phone Version">
-                            <font>
-                                <Font size="34.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="397.0" layoutY="380.0" prefHeight="50.0" prefWidth="248.0" text="Storage, SD Slot">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="397.0" layoutY="320.0" prefHeight="50.0" prefWidth="248.0" text="OS Version">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="397.0" layoutY="259.0" prefHeight="50.0" prefWidth="248.0" text="Weight, Thikness">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1100.0" layoutY="380.0" prefHeight="50.0" prefWidth="248.0" text="Quantity">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1100.0" layoutY="320.0" prefHeight="50.0" prefWidth="248.0" text="Wholesale Price">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1100.0" layoutY="259.0" prefHeight="50.0" prefWidth="248.0" text="Retial Price">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1641.0" layoutY="257.0" prefHeight="50.0" prefWidth="76.0" text="Ram">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1641.0" layoutY="320.0" prefHeight="50.0" prefWidth="104.0" text="Chipset">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="407.0" layoutY="522.0" prefHeight="50.0" prefWidth="265.0" text="Screen Size In Inches">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="407.0" layoutY="597.0" prefHeight="50.0" prefWidth="248.0" text="Screen Size In Pixels">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1037.0" layoutY="522.0" prefHeight="50.0" prefWidth="382.0" text="Camera Photo Resolution MP">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="1037.0" layoutY="597.0" prefHeight="50.0" prefWidth="382.0" text="Camera Video Resolution P">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="407.0" layoutY="675.0" prefHeight="50.0" prefWidth="248.0" text="Battery Capacity">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="407.0" layoutY="750.0" prefHeight="50.0" prefWidth="248.0" text="Battery Technology">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <!--<Button fx:id="signout" layoutX="1750.0" mnemonicParsing="false" onAction="#signout" text="Sign Out">-->
-                            <!--<font>-->
-                                <!--<Font size="30.0" />-->
-                            <!--</font>-->
-                        <!--</Button>-->
-                    </children>
-                </Pane>
-            </content>
-        </Tab>
-        <Tab text="acssociries">
-            <content>
-                <Pane prefHeight="200.0" prefWidth="200.0">
-                    <children>
-                        <Label layoutX="10.0" layoutY="10.0" text="choose accessories">
-                            <font>
-                                <Font size="41.0" />
-                            </font>
-                        </Label>
-                        <ComboBox layoutX="416.0" layoutY="25.0" prefHeight="38.0" prefWidth="240.0" />
-                        <Button layoutX="1120.0" layoutY="880.0" mnemonicParsing="false" text="Buy">
-                            <font>
-                                <Font size="39.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="1420.0" layoutY="880.0" mnemonicParsing="false" text="reserve">
-                            <font>
-                                <Font size="39.0" />
-                            </font>
-                        </Button>
-                        <ImageView fitHeight="424.0" fitWidth="320.0" layoutX="64.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="450.0" layoutY="165.0" prefHeight="40.0" prefWidth="112.0" text="Name">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <TextField layoutX="580.0" layoutY="175.0" prefHeight="20.0" prefWidth="348.0" promptText="Name">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </TextField>
-                        <Label layoutX="450.0" layoutY="265.0" prefHeight="40.0" prefWidth="112.0" text="Type">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <TextField layoutX="580.0" layoutY="275.0" prefHeight="20.0" prefWidth="348.0" promptText="Type">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </TextField>
-                        <Label layoutX="450.0" layoutY="365.0" prefHeight="40.0" prefWidth="112.0" text="Price">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <TextField layoutX="580.0" layoutY="375.0" prefHeight="20.0" prefWidth="348.0" promptText="Price">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </TextField>
-                        <Label layoutX="450.0" layoutY="465.0" prefHeight="40.0" prefWidth="112.0" text="Quantity">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <TextField layoutX="580.0" layoutY="475.0" prefHeight="20.0" prefWidth="348.0" promptText="Quantity">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </TextField>
-                        <Label layoutX="450.0" layoutY="565.0" prefHeight="40.0" prefWidth="154.0" text="Description">
-                            <font>
-                                <Font size="28.0" />
-                            </font>
-                        </Label>
-                        <TextField layoutX="450.0" layoutY="617.0" prefHeight="104.0" prefWidth="348.0">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </TextField>
-                        <Button fx:id="signout" layoutX="1750.0" mnemonicParsing="false" onAction="#signout" text="Sign Out">
-                            <font>
-                                <Font size="30.0" />
-                            </font>
-                        </Button>
-                    </children>
-                </Pane>
-            </content>
-        </Tab>
-        <Tab text="your purchase">
-            <content>
-                <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <TableView prefHeight="1033.0" prefWidth="1920.0">
-                    <columns>
-                      <TableColumn prefWidth="480.0" text="Phones" />
-                        <TableColumn prefWidth="480.0" text="Date of buy" />
-                      <TableColumn prefWidth="480.0" text="Accessories" />
-                        <TableColumn prefWidth="480.0" text="Date of buy" />
-                    </columns>
-                  </TableView>
-               </children></Pane>
-            </content>
-        </Tab>
-        <Tab text="your reserve's">
-         <content>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <TableView prefHeight="1033.0" prefWidth="1920.0">
-                     <columns>
-                        <TableColumn prefWidth="480.0" text="Phones" />
-                        <TableColumn prefWidth="480.0" text="End date of reserve " />
-                        <TableColumn prefWidth="480.0" text="Accessories" />
-                        <TableColumn prefWidth="480.0" text="End date of reserve " />
-                     </columns>
-                  </TableView>
-               </children>
-            </Pane>
-         </content>
-        </Tab>
-    </tabs>
-</TabPane>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.customerController">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE">
+          <tabs>
+              <Tab text="phones">
+                  <content>
+                      <Pane prefHeight="1080.0" prefWidth="1920.0">
+                          <children>
+                              <Label layoutX="14.0" layoutY="26.0" prefHeight="59.0" prefWidth="304.0" text="choose phone ">
+                                  <font>
+                                      <Font size="41.0" />
+                                  </font>
+                              </Label>
+                              <ComboBox layoutX="307.0" layoutY="44.0" prefHeight="34.0" prefWidth="214.0" />
+                              <Button layoutX="1120.0" layoutY="880.0" mnemonicParsing="false" text="Buy">
+                                  <font>
+                                      <Font size="39.0" />
+                                  </font>
+                              </Button>
+                              <Button layoutX="1420.0" layoutY="880.0" mnemonicParsing="false" text="reserve">
+                                  <font>
+                                      <Font size="39.0" />
+                                  </font>
+                              </Button>
+                              <ImageView fitHeight="424.0" fitWidth="320.0" layoutX="13.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label layoutX="397.0" layoutY="201.0" prefHeight="40.0" prefWidth="171.0" text="Release Date">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <DatePicker layoutX="608.0" layoutY="209.0" />
+                              <TextField layoutX="650.0" layoutY="259.0" prefHeight="0.0" prefWidth="387.0" promptText="Weight, Thikness">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="650.0" layoutY="320.0" prefHeight="0.0" prefWidth="387.0" promptText="OS Version">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="650.0" layoutY="380.0" prefHeight="0.0" prefWidth="387.0" promptText="Storage, SD Slot">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1350.0" layoutY="259.0" prefHeight="50.0" prefWidth="262.0" promptText="Retial Price">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1350.0" layoutY="320.0" prefHeight="50.0" prefWidth="262.0" promptText="Wholesale Price">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="700.0" layoutY="675.0" prefHeight="50.0" prefWidth="262.0" promptText="Battery Capacity">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="700.0" layoutY="750.0" prefHeight="50.0" prefWidth="262.0" promptText="Battery Technology">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="700.0" layoutY="522.0" prefHeight="50.0" prefWidth="238.0" promptText="Screen Size In Inches">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="700.0" layoutY="597.0" prefHeight="50.0" prefWidth="238.0" promptText="Screen Size In Pixels">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1770.0" layoutY="257.0" prefHeight="50.0" prefWidth="143.0" promptText="Screen Size In Inches">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1770.0" layoutY="320.0" prefHeight="50.0" prefWidth="143.0" promptText="Screen Size In Inches">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1450.0" layoutY="522.0" prefHeight="50.0" prefWidth="325.0" promptText="Camera Photo Resolution MP">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1450.0" layoutY="597.0" prefHeight="50.0" prefWidth="325.0" promptText="Camera Video Resolution P">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1350.0" layoutY="380.0" prefHeight="50.0" prefWidth="262.0" promptText="Quantity">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="880.0" layoutY="100.0" prefHeight="50.0" prefWidth="272.0" promptText="Name Of Phone">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <TextField layoutX="1450.0" layoutY="100.0" prefHeight="0.0" prefWidth="387.0" promptText="Phone Version">
+                                  <font>
+                                      <Font size="23.0" />
+                                  </font>
+                              </TextField>
+                              <Label layoutX="600.0" layoutY="100.0" prefHeight="50.0" prefWidth="248.0" text="Name Of Phone">
+                                  <font>
+                                      <Font size="34.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1200.0" layoutY="100.0" prefHeight="50.0" prefWidth="248.0" text="Phone Version">
+                                  <font>
+                                      <Font size="34.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="397.0" layoutY="380.0" prefHeight="50.0" prefWidth="248.0" text="Storage, SD Slot">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="397.0" layoutY="320.0" prefHeight="50.0" prefWidth="248.0" text="OS Version">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="397.0" layoutY="259.0" prefHeight="50.0" prefWidth="248.0" text="Weight, Thikness">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1100.0" layoutY="380.0" prefHeight="50.0" prefWidth="248.0" text="Quantity">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1100.0" layoutY="320.0" prefHeight="50.0" prefWidth="248.0" text="Wholesale Price">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1100.0" layoutY="259.0" prefHeight="50.0" prefWidth="248.0" text="Retial Price">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1641.0" layoutY="257.0" prefHeight="50.0" prefWidth="76.0" text="Ram">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1641.0" layoutY="320.0" prefHeight="50.0" prefWidth="104.0" text="Chipset">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="407.0" layoutY="522.0" prefHeight="50.0" prefWidth="265.0" text="Screen Size In Inches">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="407.0" layoutY="597.0" prefHeight="50.0" prefWidth="248.0" text="Screen Size In Pixels">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1037.0" layoutY="522.0" prefHeight="50.0" prefWidth="382.0" text="Camera Photo Resolution MP">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="1037.0" layoutY="597.0" prefHeight="50.0" prefWidth="382.0" text="Camera Video Resolution P">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="407.0" layoutY="675.0" prefHeight="50.0" prefWidth="248.0" text="Battery Capacity">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="407.0" layoutY="750.0" prefHeight="50.0" prefWidth="248.0" text="Battery Technology">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <!--<Button fx:id="signout" layoutX="1750.0" mnemonicParsing="false" onAction="#signout" text="Sign Out">-->
+                                  <!--<font>-->
+                                      <!--<Font size="30.0" />-->
+                                  <!--</font>-->
+                              <!--</Button>-->
+                          </children>
+                      </Pane>
+                  </content>
+              </Tab>
+              <Tab text="acssociries">
+                  <content>
+                      <Pane prefHeight="200.0" prefWidth="200.0">
+                          <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="choose accessories">
+                                  <font>
+                                      <Font size="41.0" />
+                                  </font>
+                              </Label>
+                              <ComboBox layoutX="416.0" layoutY="25.0" prefHeight="38.0" prefWidth="240.0" />
+                              <Button layoutX="1120.0" layoutY="880.0" mnemonicParsing="false" text="Buy">
+                                  <font>
+                                      <Font size="39.0" />
+                                  </font>
+                              </Button>
+                              <Button layoutX="1420.0" layoutY="880.0" mnemonicParsing="false" text="reserve">
+                                  <font>
+                                      <Font size="39.0" />
+                                  </font>
+                              </Button>
+                              <ImageView fitHeight="424.0" fitWidth="320.0" layoutX="64.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label layoutX="450.0" layoutY="165.0" prefHeight="40.0" prefWidth="112.0" text="Name">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <TextField layoutX="580.0" layoutY="175.0" prefHeight="20.0" prefWidth="348.0" promptText="Name">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </TextField>
+                              <Label layoutX="450.0" layoutY="265.0" prefHeight="40.0" prefWidth="112.0" text="Type">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <TextField layoutX="580.0" layoutY="275.0" prefHeight="20.0" prefWidth="348.0" promptText="Type">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </TextField>
+                              <Label layoutX="450.0" layoutY="365.0" prefHeight="40.0" prefWidth="112.0" text="Price">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <TextField layoutX="580.0" layoutY="375.0" prefHeight="20.0" prefWidth="348.0" promptText="Price">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </TextField>
+                              <Label layoutX="450.0" layoutY="465.0" prefHeight="40.0" prefWidth="112.0" text="Quantity">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <TextField layoutX="580.0" layoutY="475.0" prefHeight="20.0" prefWidth="348.0" promptText="Quantity">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </TextField>
+                              <Label layoutX="450.0" layoutY="565.0" prefHeight="40.0" prefWidth="154.0" text="Description">
+                                  <font>
+                                      <Font size="28.0" />
+                                  </font>
+                              </Label>
+                              <TextField layoutX="450.0" layoutY="617.0" prefHeight="104.0" prefWidth="348.0">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </TextField>
+                              <Button fx:id="signout" layoutX="1750.0" mnemonicParsing="false" onAction="#signout" text="Sign Out">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Button>
+                          </children>
+                      </Pane>
+                  </content>
+              </Tab>
+              <Tab text="your purchase">
+                  <content>
+                      <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="1033.0" prefWidth="1920.0">
+                          <columns>
+                            <TableColumn prefWidth="480.0" text="Phones" />
+                              <TableColumn prefWidth="480.0" text="Date of buy" />
+                            <TableColumn prefWidth="480.0" text="Accessories" />
+                              <TableColumn prefWidth="480.0" text="Date of buy" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+                  </content>
+              </Tab>
+              <Tab text="your reserve's">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="1033.0" prefWidth="1920.0">
+                           <columns>
+                              <TableColumn prefWidth="480.0" text="Phones" />
+                              <TableColumn prefWidth="480.0" text="End date of reserve " />
+                              <TableColumn prefWidth="480.0" text="Accessories" />
+                              <TableColumn prefWidth="480.0" text="End date of reserve " />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </content>
+              </Tab>
+          </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

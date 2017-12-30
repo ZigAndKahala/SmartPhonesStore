@@ -12,139 +12,149 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ownerController">
-  <tabs>
-    <Tab text="Add Employee">
-         <content>
-            <AnchorPane prefHeight="1080.0" prefWidth="1920.0">
-               <children>
-                  <Label layoutX="150.0" layoutY="44.0" text="Name" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="108.0" layoutY="290.0" text="Mobile number" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="996.0" layoutY="456.0" text="Email Address" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="1024.0" layoutY="389.0" text="Date of birth" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="500.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="name" layoutX="595.0" layoutY="111.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="200.0">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="number" layoutX="694.0" layoutY="195.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="email" layoutX="633.0" layoutY="262.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </TextField>
-                  <Button fx:id="clear" layoutX="1242.0" layoutY="855.0" mnemonicParsing="false" onAction="#clearall" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="356.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Button>
-                  <DatePicker fx:id="dat" layoutX="666.0" layoutY="507.0" prefHeight="38.0" prefWidth="328.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="500.0" />
-                  <Button fx:id="addemployee" layoutX="1464.0" layoutY="869.0" mnemonicParsing="false" text="Add empoyee" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Button>
-                  <Label layoutX="93.0" layoutY="75.0" text="Add Emplyee" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                     <font>
-                        <Font size="60.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </content>
-    </Tab>
-    <Tab text="Set Salary">
-         <content>
-            <AnchorPane>
-               <children>
-                  <Label layoutX="28.0" layoutY="27.0" text="Set Salary" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                     <font>
-                        <Font size="60.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="189.0" layoutY="232.0" text="Select Employee" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="27.0" layoutY="434.0" text="Day of Payment" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="1107.0" layoutY="277.0" text="Employee salary" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <ChoiceBox layoutX="571.0" layoutY="209.0" prefHeight="50.0" prefWidth="400.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="200.0" />
-                  <TextField layoutX="609.0" layoutY="303.0" prefHeight="50.0" prefWidth="400.0" promptText="in dollars per month" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </TextField>
-                  <TextField layoutX="557.0" layoutY="418.0" prefHeight="50.0" prefWidth="400.0" promptText="input from 1 to 30" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </TextField>
-                  <Button layoutX="851.0" layoutY="662.0" mnemonicParsing="false" text="clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="192.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="1349.0" layoutY="759.0" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
-         </content>
-    </Tab>
-      <Tab text="Inventory">
-         <content>
-            <AnchorPane>
-               <children>
-                  <TableView prefHeight="1060.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn prefWidth="240.0" text="Incomings" />
-                      <TableColumn prefWidth="240.0" text="Date" />
-                        <TableColumn prefWidth="240.0" text="Quantity" />
-                        <TableColumn prefWidth="240.0" text="Price" />
-                    </columns>
-                  </TableView>
-                  <TableView prefHeight="1060.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <columns>
-                        <TableColumn prefWidth="240.0" text="Sellings" />
-                        <TableColumn prefWidth="240.0" text="Date" />
-                        <TableColumn prefWidth="240.0" text="Quantity" />
-                        <TableColumn prefWidth="240.0" text="Price" />
-                     </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-  </tabs>
-</TabPane>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ownerController">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Add Employee">
+               <content>
+                  <AnchorPane prefHeight="1080.0" prefWidth="1920.0">
+                     <children>
+                        <Label layoutX="150.0" layoutY="44.0" text="Name" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="108.0" layoutY="290.0" text="Mobile number" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="996.0" layoutY="456.0" text="Email Address" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1024.0" layoutY="389.0" text="Date of birth" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="500.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="name" layoutX="595.0" layoutY="111.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="200.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="number" layoutX="694.0" layoutY="195.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="email" layoutX="633.0" layoutY="262.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="clear" layoutX="1242.0" layoutY="855.0" mnemonicParsing="false" onAction="#clearAll" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="356.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Button>
+                        <DatePicker fx:id="dat" layoutX="666.0" layoutY="507.0" prefHeight="38.0" prefWidth="328.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="500.0" />
+                        <Button fx:id="addemployee" layoutX="1464.0" layoutY="869.0" mnemonicParsing="false" text="Add empoyee" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="93.0" layoutY="75.0" text="Add Emplyee" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab text="Set Salary">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <Label layoutX="28.0" layoutY="27.0" text="Set Salary" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="189.0" layoutY="232.0" text="Select Employee" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="27.0" layoutY="434.0" text="Day of Payment" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1107.0" layoutY="277.0" text="Employee salary" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox layoutX="571.0" layoutY="209.0" prefHeight="50.0" prefWidth="400.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="200.0" />
+                        <TextField layoutX="609.0" layoutY="303.0" prefHeight="50.0" prefWidth="400.0" promptText="in dollars per month" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="557.0" layoutY="418.0" prefHeight="50.0" prefWidth="400.0" promptText="input from 1 to 30" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="851.0" layoutY="662.0" mnemonicParsing="false" text="clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="192.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="1349.0" layoutY="759.0" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab text="Inventory">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <TableView fx:id="incomingTable" prefHeight="1060.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="240.0" text="Incomings" />
+                            <TableColumn prefWidth="240.0" text="Date" />
+                              <TableColumn prefWidth="240.0" text="Quantity" />
+                              <TableColumn prefWidth="240.0" text="Price" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="sellingTable" prefHeight="1060.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn prefWidth="240.0" text="Sellings" />
+                              <TableColumn prefWidth="240.0" text="Date" />
+                              <TableColumn prefWidth="240.0" text="Quantity" />
+                              <TableColumn prefWidth="240.0" text="Price" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#signOut" text="Sign Out" textFill="RED" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
