@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 public class signUpController {
@@ -44,12 +48,21 @@ public class signUpController {
     }
 
     public void signUp(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        LocalDate localDate = dateOfBirth.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+
+
         DatabaseAPI databaseAPI = new DatabaseAPI();
         databaseAPI.write("insert INTO customer (name, email,password,mobileNumber) VALUES ("+ "\"" + name.getText() + "\",\"" + email.getText() + "\",\"" + password.getText() + "\"," + Integer.parseInt(phoneNumber.getText()) + ");");
 
+        ResultSet maxCid = databaseAPI.read("SELECT max(cid) from customer;");
+        maxCid.next();
+
+        int mCid = maxCid.getInt("max(cid)");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
-        alert.setContentText("Your user ID is : " + 10000000);
+        alert.setContentText("Your user ID is : " + mCid);
         alert.showAndWait();
     }
 
