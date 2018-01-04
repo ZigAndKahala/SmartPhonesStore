@@ -17,7 +17,7 @@ public class DatabaseAPI {
 
     public void startConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/phonesstore", "root", "lenovo15");
+                "jdbc:mysql://localhost:3306/phonesstore", "root", "root");
     }
 
     public ResultSet read(String sql) throws SQLException {

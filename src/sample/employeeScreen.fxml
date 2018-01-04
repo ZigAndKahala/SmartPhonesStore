@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
    <children>
       <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -22,12 +22,12 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <TextField layoutX="27.0" layoutY="72.0" prefHeight="65.0" prefWidth="467.0" promptText="Phone Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                        <TextField fx:id="phoneName" layoutX="27.0" layoutY="72.0" prefHeight="65.0" prefWidth="467.0" promptText="Phone Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="407.0" layoutY="79.0" prefHeight="65.0" prefWidth="467.0" promptText="Phone version" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="20.0">
+                        <TextField fx:id="phoneVersion" layoutX="407.0" layoutY="79.0" prefHeight="65.0" prefWidth="467.0" promptText="Phone version" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -37,58 +37,58 @@
                               <Image url="https://cdn2.gsmarena.com/vv/bigpic/lg-v30-.jpg" />
                            </image>
                         </ImageView>
-                        <DatePicker layoutX="1029.0" layoutY="642.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="150.0" />
+                        <DatePicker fx:id="releaseDate" layoutX="1029.0" layoutY="642.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="150.0" />
                         <Label layoutX="562.0" layoutY="225.0" text="Release Date" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="150.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="534.0" layoutY="195.0" prefHeight="37.0" prefWidth="434.0" promptText="weight, thiknees" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="200.0">
+                        <TextField fx:id="weightThikness" layoutX="534.0" layoutY="195.0" prefHeight="37.0" prefWidth="434.0" promptText="weight, thiknees" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="200.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="426.0" layoutY="252.0" prefHeight="37.0" prefWidth="434.0" promptText="OS Version" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="250.0">
+                        <TextField fx:id="OsVersion" layoutX="426.0" layoutY="252.0" prefHeight="37.0" prefWidth="434.0" promptText="OS Version" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="250.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="429.0" layoutY="323.0" prefHeight="37.0" prefWidth="434.0" promptText="Storage, SD Slot" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="300.0">
+                        <TextField fx:id="storageSdSlot" layoutX="429.0" layoutY="323.0" prefHeight="37.0" prefWidth="434.0" promptText="Storage, SD Slot" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="300.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="416.0" layoutY="420.0" prefHeight="65.0" prefWidth="319.0" promptText="Screen Size In Inches" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="420.0">
+                        <TextField fx:id="screenSizeInInches" layoutX="416.0" layoutY="420.0" prefHeight="65.0" prefWidth="319.0" promptText="Screen Size In Inches" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="420.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="416.0" layoutY="490.0" prefHeight="44.0" prefWidth="319.0" promptText="Screen Size In Pixels" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="490.0">
+                        <TextField fx:id="screenSizeInPixels" layoutX="416.0" layoutY="490.0" prefHeight="44.0" prefWidth="319.0" promptText="Screen Size In Pixels" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="490.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="817.0" layoutY="421.0" prefHeight="65.0" prefWidth="425.0" promptText="Camera Photo Resolution MP" AnchorPane.leftAnchor="820.0">
+                        <TextField fx:id="cameraPhotoResolution" layoutX="817.0" layoutY="421.0" prefHeight="65.0" prefWidth="425.0" promptText="Camera Photo Resolution MP" AnchorPane.leftAnchor="820.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="816.0" layoutY="490.0" prefHeight="44.0" prefWidth="425.0" promptText="Camera Video Resolution P" AnchorPane.leftAnchor="820.0">
+                        <TextField fx:id="cameraVideoResolution" layoutX="816.0" layoutY="490.0" prefHeight="44.0" prefWidth="425.0" promptText="Camera Video Resolution P" AnchorPane.leftAnchor="820.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="1357.0" layoutY="421.0" prefHeight="65.0" prefWidth="104.0" promptText="RAM" AnchorPane.leftAnchor="1300.0">
+                        <TextField fx:id="ram" layoutX="1357.0" layoutY="421.0" prefHeight="65.0" prefWidth="104.0" promptText="RAM" AnchorPane.leftAnchor="1300.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="1365.0" layoutY="491.0" prefHeight="44.0" prefWidth="106.0" promptText="Chipset" AnchorPane.leftAnchor="1300.0">
+                        <TextField fx:id="chipSet" layoutX="1365.0" layoutY="491.0" prefHeight="44.0" prefWidth="106.0" promptText="Chipset" AnchorPane.leftAnchor="1300.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="1548.0" layoutY="419.0" prefHeight="65.0" prefWidth="253.0" promptText="Battery Capacity" AnchorPane.leftAnchor="1500.0">
+                        <TextField fx:id="BatteryCapacity" layoutX="1548.0" layoutY="419.0" prefHeight="65.0" prefWidth="253.0" promptText="Battery Capacity" AnchorPane.leftAnchor="1500.0">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -113,17 +113,17 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <TextField layoutX="936.0" layoutY="151.0" prefHeight="65.0" prefWidth="392.0" promptText="Retail Price" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="150.0">
+                        <TextField fx:id="retailPrice" layoutX="936.0" layoutY="151.0" prefHeight="65.0" prefWidth="392.0" promptText="Retail Price" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="150.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="1008.0" layoutY="230.0" prefHeight="65.0" prefWidth="392.0" promptText="Wholesale Price" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="223.0">
+                        <TextField fx:id="wholesalePrice" layoutX="1008.0" layoutY="230.0" prefHeight="65.0" prefWidth="392.0" promptText="Wholesale Price" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="223.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="943.0" layoutY="307.0" prefHeight="65.0" prefWidth="392.0" promptText="Quantity" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="297.0">
+                        <TextField fx:id="Quantity" layoutX="943.0" layoutY="307.0" prefHeight="65.0" prefWidth="392.0" promptText="Quantity" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="297.0">
                            <font>
                               <Font size="30.0" />
                            </font>
