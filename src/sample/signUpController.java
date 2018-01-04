@@ -49,12 +49,13 @@ public class signUpController {
 
     public void signUp(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         LocalDate localDate = dateOfBirth.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        Date date = Date.from(instant);
+//        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+//        Date date = Date.from(instant);
+        String date = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
 
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
-        databaseAPI.write("insert INTO customer (name, email,password,mobileNumber) VALUES ("+ "\"" + name.getText() + "\",\"" + email.getText() + "\",\"" + password.getText() + "\"," + Integer.parseInt(phoneNumber.getText()) + ");");
+        databaseAPI.write("insert INTO customer (name, email,password,mobileNumber,dateOfBirth) VALUES ("+ "\"" + name.getText() + "\",\"" + email.getText() + "\",\"" + password.getText() + "\"," + Integer.parseInt(phoneNumber.getText()) + ",\"" + date  + "\"" + ")");
 
         ResultSet maxCid = databaseAPI.read("SELECT max(cid) from customer;");
         maxCid.next();
