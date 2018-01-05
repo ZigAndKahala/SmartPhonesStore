@@ -24,3 +24,5 @@ hs_err_pid*
 
 .idea
 *.iml
+/src/sample/employeeScreen.fxml
+/src/sample/ownerScreen.fxml
