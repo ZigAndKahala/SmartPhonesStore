@@ -37,6 +37,7 @@ public class DatabaseAPI {
         startConnection();
         Statement statement = connection.createStatement();
 
+        System.out.println(sql);
         int x = statement.executeUpdate(sql);
         connection.close();
         connection = null;
@@ -47,13 +48,13 @@ public class DatabaseAPI {
         StringBuilder sqlFormat = new StringBuilder("(");
         for (Object object : listOfInputs){
             if (object instanceof Integer){
-                sqlFormat.append(object);
-            }else if(object instanceof String){
-                sqlFormat.append("\"").append(object).append("\"");
+                sqlFormat.append(object).append(",");
+            }else if(object instanceof String && !object.equals("")){
+                sqlFormat.append("\"").append(object).append("\",");
             }
-            sqlFormat.append(",");
         }
-        sqlFormat.deleteCharAt(sqlFormat.length() - 1);
+        if (sqlFormat.charAt(sqlFormat.length() - 1) == ',')
+            sqlFormat.deleteCharAt(sqlFormat.length() - 1);
         sqlFormat.append(")");
         return sqlFormat.toString();
     }
@@ -64,7 +65,8 @@ public class DatabaseAPI {
         int indexOfInput = 0;
         for (Object object : listOfInputs)
             if (object != null)
-                sqlFormat.append(parameters.get(indexOfInput++)).append(",");
+                if(object instanceof String && !object.equals(""))
+                    sqlFormat.append(parameters.get(indexOfInput++)).append(",");
         sqlFormat.deleteCharAt(sqlFormat.length() - 1);
         sqlFormat.append(") Values");
         sqlFormat.append(convertToSqlFormat(listOfInputs));

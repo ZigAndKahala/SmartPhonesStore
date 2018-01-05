@@ -13,11 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -54,19 +51,21 @@ public class signUpController {
 
     public void signUp(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         LocalDate localDate = dateOfBirth.getValue();
-//        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-//        Date date = Date.from(instant);
-        String date = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
+        String date = null;
+        if (localDate != null)
+            date = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
 
         List<Object> parameters = new ArrayList<>();
         parameters.add(name.getText());
         parameters.add(email.getText());
         parameters.add(password.getText());
-        parameters.add(Integer.parseInt(phoneNumber.getText()));
+        if (!phoneNumber.getText().equals(""))
+            parameters.add(Integer.parseInt(phoneNumber.getText()));
+        else
+            parameters.add(null);
         parameters.add(date);
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
-//        databaseAPI.write("insert INTO customer (name, email,password,mobileNumber,dateOfBirth) VALUES ("+ "\"" + name.getText() + "\",\"" + email.getText() + "\",\"" + password.getText() + "\"," + Integer.parseInt(phoneNumber.getText()) + ",\"" + date  + "\"" + ")");
         databaseAPI.write("INSERT INTO customer " + DatabaseAPI.generateSqlCommand("name,email,password,mobileNumber,dateOfBirth",parameters));
         ResultSet maxCid = databaseAPI.read("SELECT max(cid) from customer;");
         maxCid.next();

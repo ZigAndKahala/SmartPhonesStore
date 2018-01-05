@@ -20,7 +20,8 @@
             <Font size="30.0" />
          </font>
       </TextField>
-      <TextField fx:id="email" layoutX="493.0" layoutY="307.0" prefHeight="56.0" prefWidth="827.0" AnchorPane.leftAnchor="493.0" AnchorPane.topAnchor="307.0" />
+      <TextField fx:id="email" layoutX="493.0" layoutY="307.0" prefHeight="56.0" prefWidth="827.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="307.0" />
+      <PasswordField fx:id="password" layoutX="587.0" layoutY="510.0" prefHeight="56.0" prefWidth="827.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="500.0" />
       <TextField fx:id="phoneNumber" layoutX="521.0" layoutY="413.0" prefHeight="56.0" prefWidth="827.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0" />
       <DatePicker fx:id="dateOfBirth" layoutX="679.0" layoutY="627.0" prefHeight="60.0" prefWidth="306.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="600.0" />
       <Label layoutX="243.0" layoutY="132.0" text="Name" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
@@ -63,6 +64,5 @@
             <Font size="40.0" />
          </font>
       </Button>
-      <PasswordField fx:id="password" layoutX="587.0" layoutY="510.0" prefHeight="56.0" prefWidth="827.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="500.0" />
    </children>
 </AnchorPane>
