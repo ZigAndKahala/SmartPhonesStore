@@ -20,9 +20,9 @@ public class employeeController {
     public AnchorPane addPromo;
 
     public void initialize(){
-        addPhone.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
-        addAccessory.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
-        addPromo.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
+//        addPhone.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
+//        addAccessory.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
+//        addPromo.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
     }
 
     @SuppressWarnings("Duplicates")
