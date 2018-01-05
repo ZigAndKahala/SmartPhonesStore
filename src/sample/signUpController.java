@@ -33,10 +33,13 @@ public class signUpController {
 
     }
 
+
     public void clear(ActionEvent actionEvent) {
         name.setText("");
         email.setText("");
         phoneNumber.setText("");
+        password.setText("");
+        dateOfBirth.setValue(null);
     }
 
     public void backToSignIn(ActionEvent actionEvent) throws IOException {
