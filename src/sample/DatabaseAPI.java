@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DatabaseAPI {
 
@@ -17,7 +20,7 @@ public class DatabaseAPI {
 
     public void startConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/phonesstore", "root", "root");
+                "jdbc:mysql://localhost:3306/phonesstore", "root", "lenovo15");
     }
 
     public ResultSet read(String sql) throws SQLException {
@@ -40,4 +43,31 @@ public class DatabaseAPI {
         return x;
     }
 
+    public static String convertToSqlFormat(List<Object> listOfInputs){
+        StringBuilder sqlFormat = new StringBuilder("(");
+        for (Object object : listOfInputs){
+            if (object instanceof Integer){
+                sqlFormat.append(object);
+            }else if(object instanceof String){
+                sqlFormat.append("\"").append(object).append("\"");
+            }
+            sqlFormat.append(",");
+        }
+        sqlFormat.deleteCharAt(sqlFormat.length() - 1);
+        sqlFormat.append(")");
+        return sqlFormat.toString();
+    }
+
+    public static String generateSqlCommand(String listOfParameters, List<Object> listOfInputs){
+        StringBuilder sqlFormat = new StringBuilder("(");
+        List<String> parameters = Arrays.asList(listOfParameters.split(","));
+        int indexOfInput = 0;
+        for (Object object : listOfInputs)
+            if (object != null)
+                sqlFormat.append(parameters.get(indexOfInput++)).append(",");
+        sqlFormat.deleteCharAt(sqlFormat.length() - 1);
+        sqlFormat.append(") Values");
+        sqlFormat.append(convertToSqlFormat(listOfInputs));
+        return sqlFormat.toString();
+    }
 }
