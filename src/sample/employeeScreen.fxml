@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
+<AnchorPane fx:id="anchor" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
    <children>
       <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -32,7 +32,7 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <ImageView fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
+                        <ImageView fx:id="photoShow" fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
                            <image>
                               <Image url="https://cdn2.gsmarena.com/vv/bigpic/lg-v30-.jpg" />
                            </image>
@@ -73,7 +73,7 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="cameraVideoResolution" layoutX="816.0" layoutY="490.0" prefHeight="44.0" prefWidth="425.0" promptText="Camera Video Resolution P" AnchorPane.leftAnchor="820.0">
+                        <TextField fx:id="cameraVideoResolution" layoutX="820.0" layoutY="469.0" prefHeight="44.0" prefWidth="425.0" promptText="Camera Video Resolution P" AnchorPane.leftAnchor="820.0">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -93,17 +93,17 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="1576.0" layoutY="492.0" prefHeight="44.0" prefWidth="194.0" promptText="Battery Technology" AnchorPane.leftAnchor="1500.0">
+                        <TextField fx:id="batteryTecnolgy" layoutX="1576.0" layoutY="492.0" prefHeight="44.0" prefWidth="194.0" promptText="Battery Technology" AnchorPane.leftAnchor="1500.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="1504.0" layoutY="826.0" mnemonicParsing="false" text="Add Phone" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+                        <Button fx:id="adPhone" layoutX="1504.0" layoutY="826.0" mnemonicParsing="false" onAction="#addPhoneAction" text="Add Phone" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="1000.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <Button layoutX="1318.0" layoutY="804.0" mnemonicParsing="false" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="243.0">
+                        <Button fx:id="clear" layoutX="400.0" layoutY="502.0" mnemonicParsing="false" onAction="#clearAction" text="Clear" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="1245.0">
                            <font>
                               <Font size="30.0" />
                            </font>
