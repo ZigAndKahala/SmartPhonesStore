@@ -44,13 +44,14 @@ public class DatabaseAPI {
         return x;
     }
 
-    public static String convertToSqlFormat(List<Object> listOfInputs){
+    public static String convertToSqlFormat(List<String> listOfInputs){
         StringBuilder sqlFormat = new StringBuilder("(");
-        for (Object object : listOfInputs){
-            if (object instanceof Integer){
-                sqlFormat.append(object).append(",");
-            }else if(object instanceof String && !object.equals("")){
-                sqlFormat.append("\"").append(object).append("\",");
+        for (String string : listOfInputs){
+            if(!string.equals("")){
+                if(!isStringFilledWithNumbers(string))
+                    sqlFormat.append("\"").append(string).append("\",");
+                else
+                    sqlFormat.append(string).append(",");
             }
         }
         if (sqlFormat.charAt(sqlFormat.length() - 1) == ',')
@@ -59,17 +60,25 @@ public class DatabaseAPI {
         return sqlFormat.toString();
     }
 
-    public static String generateSqlCommand(String listOfParameters, List<Object> listOfInputs){
+    public static String generateSqlCommand(String listOfParameters, List<String> listOfInputs){
         StringBuilder sqlFormat = new StringBuilder("(");
         List<String> parameters = Arrays.asList(listOfParameters.split(","));
         int indexOfInput = 0;
-        for (Object object : listOfInputs)
-            if (object != null)
-                if(object instanceof String && !object.equals(""))
-                    sqlFormat.append(parameters.get(indexOfInput++)).append(",");
+        for (String string : listOfInputs) {
+            if (!string.equals(""))
+                sqlFormat.append(parameters.get(indexOfInput)).append(",");
+            indexOfInput++;
+        }
         sqlFormat.deleteCharAt(sqlFormat.length() - 1);
         sqlFormat.append(") Values");
         sqlFormat.append(convertToSqlFormat(listOfInputs));
         return sqlFormat.toString();
+    }
+
+    private static Boolean isStringFilledWithNumbers(String string){
+        for(Character character : string.toCharArray())
+            if(!Character.isDigit(character))
+                return false;
+        return true;
     }
 }

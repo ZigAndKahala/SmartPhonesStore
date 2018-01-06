@@ -2,12 +2,12 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +28,12 @@ public class signUpController {
     public Button clear;
     public Button back;
 
+    private Popup emailPopup;
+    private Popup phoneNumberPopup;
+
+    private Boolean isPhoneNumberCorrect = true;
+    private Boolean isEmailNumberCorrect = true;
+
     public void initialize(){
 
     }
@@ -42,11 +48,7 @@ public class signUpController {
     }
 
     public void backToSignIn(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("signInScreen.fxml"));
-        Stage stage = (Stage) back.getScene().getWindow();
-        Parent root = loader.load();
-        Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
-        stage.setScene(scene);
+        ScreenSwitcher.goToScreen(new FXMLLoader(getClass().getResource("signInScreen.fxml")),(Stage)back.getScene().getWindow());
     }
 
     public void signUp(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -55,14 +57,29 @@ public class signUpController {
         if (localDate != null)
             date = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
 
-        List<Object> parameters = new ArrayList<>();
+        if(name.getText().equals("") || email.getText().equals("") || phoneNumber.getText().equals("") || password.getText().equals("") || date == null){
+            Stage thisStage = (Stage) name.getScene().getWindow();
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Please Fill All The Fields!",1,30),thisStage);
+            return;
+        }else if(!isEmailNumberCorrect || !isPhoneNumberCorrect){
+            if (!isEmailNumberCorrect){
+                if (emailPopup != null)
+                    emailPopup.hide();
+                emailPopup = PopupMessage.showPopupMessageTextField(PopupMessage.createPopup("Incorrect Email Address!", 1, 16), (Stage) email.getScene().getWindow(), email);
+            }
+            else {
+                if (phoneNumberPopup != null)
+                    phoneNumberPopup.hide();
+                phoneNumberPopup = PopupMessage.showPopupMessageTextField(PopupMessage.createPopup("Incorrect Number!", 1, 16), (Stage) email.getScene().getWindow(), phoneNumber);
+            }
+            return;
+        }
+
+        List<String> parameters = new ArrayList<>();
         parameters.add(name.getText());
         parameters.add(email.getText());
         parameters.add(password.getText());
-        if (!phoneNumber.getText().equals(""))
-            parameters.add(Integer.parseInt(phoneNumber.getText()));
-        else
-            parameters.add(null);
+        parameters.add(phoneNumber.getText());
         parameters.add(date);
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
@@ -77,22 +94,30 @@ public class signUpController {
         alert.showAndWait();
     }
 
-    private static void refresh() {
-        try {
-            DatabaseAPI db = new DatabaseAPI();
-            String sql = "Select * from customer";
+    public void editingEmail(KeyEvent actionEvent) {
+        if (emailPopup != null)
+            emailPopup.hide();
 
-            ResultSet result = db.read(sql);
-            StringBuilder emps = new StringBuilder();
-            while(result.next()){
-                emps.append(result.getString(1)).append("\t").append(result.getString(2)).append("\t").append(result.getString(3)).append("\n");
-            }
-            System.out.println(emps);
-            db.connection.close();
-            db.connection = null;
-        } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (!(email.getText().contains("@") && email.getText().contains("."))) {
+            emailPopup = PopupMessage.showPopupMessageTextField(PopupMessage.createPopup("Incorrect Email Address!", 1, 16), (Stage) email.getScene().getWindow(), email);
+            isEmailNumberCorrect = false;
+        }else {
+            emailPopup = PopupMessage.showPopupMessageTextField(PopupMessage.createPopup("correct", 0, 16), (Stage) email.getScene().getWindow(), email);
+            isEmailNumberCorrect = true;
         }
+    }
+
+    public void editingNumber(KeyEvent keyEvent) {
+        if(phoneNumberPopup != null)
+            phoneNumberPopup.hide();
+
+        isPhoneNumberCorrect = true;
+
+        for (char character : phoneNumber.getText().toCharArray())
+            if (!Character.isDigit(character))
+                isPhoneNumberCorrect = false;
+
+        if (!isPhoneNumberCorrect)
+            phoneNumberPopup = PopupMessage.showPopupMessageTextField(PopupMessage.createPopup("Incorrect Number!", 1, 16), (Stage) email.getScene().getWindow(), phoneNumber);
     }
 }

@@ -17,18 +17,16 @@ public class signInController {
     public TextField userId;
 
     public void signIn(ActionEvent actionEvent) throws IOException {
-//        FXMLLoader loader = null;
-//        switch (userId.getText().length()){
-//            case 3 : loader = new FXMLLoader(getClass().getResource("ownerScreen.fxml"));break;
-//            case 4 : loader = new FXMLLoader(getClass().getResource("employeeScreen.fxml"));break;
-//            case 8 : loader = new FXMLLoader(getClass().getResource("customerScreen.fxml"));break;
-//        }
-//        Stage stage = (Stage) signIn.getScene().getWindow();
-//        Parent root = loader.load();
-//        Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
-//        stage.setScene(scene);
-
-        PopupMessage.showPopupMessageTextField("Does it work?",(Stage)password.getScene().getWindow(),userId);
+        FXMLLoader loader = null;
+        switch (userId.getText().length()){
+            case 3 : loader = new FXMLLoader(getClass().getResource("ownerScreen.fxml"));break;
+            case 4 : loader = new FXMLLoader(getClass().getResource("employeeScreen.fxml"));break;
+            case 8 : loader = new FXMLLoader(getClass().getResource("customerScreen.fxml"));break;
+        }
+        Stage stage = (Stage) signIn.getScene().getWindow();
+        Parent root = loader.load();
+        Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
+        stage.setScene(scene);
     }
 
     public void signUp(ActionEvent actionEvent) throws IOException {
