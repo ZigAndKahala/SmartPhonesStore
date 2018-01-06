@@ -7,14 +7,13 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
+<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
    <children>
       <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <tabs>
@@ -32,78 +31,69 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <ImageView fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
+                        <ImageView fx:id="imageview" fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
                            <image>
                               <Image url="https://cdn2.gsmarena.com/vv/bigpic/lg-v30-.jpg" />
                            </image>
                         </ImageView>
-                        <DatePicker fx:id="releaseDate" layoutX="1029.0" layoutY="642.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="150.0" />
+                        <DatePicker fx:id="releaseDate" layoutX="1029.0" layoutY="642.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="160.0" />
                         <Label layoutX="562.0" layoutY="225.0" text="Release Date" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="150.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="weightThikness" layoutX="534.0" layoutY="195.0" prefHeight="37.0" prefWidth="434.0" promptText="weight, thiknees" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="200.0">
+                        <TextField fx:id="weightThikness" layoutX="534.0" layoutY="195.0" prefHeight="37.0" prefWidth="300.0" promptText="weight, thiknees" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="200.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="OsVersion" layoutX="426.0" layoutY="252.0" prefHeight="37.0" prefWidth="434.0" promptText="OS Version" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="250.0">
+                        <TextField fx:id="OsVersion" layoutX="426.0" layoutY="252.0" prefHeight="37.0" prefWidth="300.0" promptText="OS Version" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="250.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="storageSdSlot" layoutX="429.0" layoutY="323.0" prefHeight="37.0" prefWidth="434.0" promptText="Storage, SD Slot" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="300.0">
+                        <TextField fx:id="storageSdSlot" layoutX="429.0" layoutY="323.0" prefHeight="37.0" prefWidth="300.0" promptText="Storage, SD Slot" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="300.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="screenSizeInInches" layoutX="416.0" layoutY="420.0" prefHeight="65.0" prefWidth="319.0" promptText="Screen Size In Inches" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="420.0">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="screenSizeInPixels" layoutX="416.0" layoutY="490.0" prefHeight="44.0" prefWidth="319.0" promptText="Screen Size In Pixels" AnchorPane.leftAnchor="416.0" AnchorPane.topAnchor="490.0">
+                        <TextField fx:id="RAMAndChipset" layoutX="1157.0" layoutY="175.0" prefHeight="37.0" prefWidth="200.0" promptText="RAM and Chipset" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="200.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="cameraPhotoResolution" layoutX="817.0" layoutY="421.0" prefHeight="65.0" prefWidth="425.0" promptText="Camera Photo Resolution MP" AnchorPane.leftAnchor="820.0">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="cameraVideoResolution" layoutX="816.0" layoutY="490.0" prefHeight="44.0" prefWidth="425.0" promptText="Camera Video Resolution P" AnchorPane.leftAnchor="820.0">
+                        <TextField fx:id="status" layoutX="1157.0" layoutY="225.0" prefHeight="37.0" prefWidth="200.0" promptText="Status" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="250.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="ram" layoutX="1357.0" layoutY="421.0" prefHeight="65.0" prefWidth="104.0" promptText="RAM" AnchorPane.leftAnchor="1300.0">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="chipSet" layoutX="1365.0" layoutY="491.0" prefHeight="44.0" prefWidth="106.0" promptText="Chipset" AnchorPane.leftAnchor="1300.0">
+                        <TextField fx:id="screenSizeAndResolution" layoutX="416.0" layoutY="420.0" prefHeight="37.0" prefWidth="380.0" promptText="Screen Size And Resolution" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="370.0">
+
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="BatteryCapacity" layoutX="1548.0" layoutY="419.0" prefHeight="65.0" prefWidth="253.0" promptText="Battery Capacity" AnchorPane.leftAnchor="1500.0">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </TextField>
-                        <TextField layoutX="1576.0" layoutY="492.0" prefHeight="44.0" prefWidth="194.0" promptText="Battery Technology" AnchorPane.leftAnchor="1500.0">
+                        <TextField fx:id="cameraPhotoResolution" layoutX="820.0" layoutY="567.0" prefHeight="37.0" prefWidth="380.0" promptText="Camera Photo and Video Resolution MP" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="420.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="1504.0" layoutY="826.0" mnemonicParsing="false" text="Add Phone" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+                        <TextField fx:id="BatteryCapacity" layoutX="1548.0" layoutY="419.0" prefHeight="37.0" prefWidth="380.0" promptText="Battery Capacity and Technology" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="470.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="description" layoutX="1100.0" layoutY="504.0" prefHeight="100.0" prefWidth="380.0" promptText="Description" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="520.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="1504.0" layoutY="826.0" mnemonicParsing="false" onAction="#addPhoneAction" text="Add Phone" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <Button layoutX="1318.0" layoutY="804.0" mnemonicParsing="false" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="243.0">
+                        <Button layoutX="1318.0" layoutY="804.0" mnemonicParsing="false" onAction="#clearAction" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="243.0">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -113,19 +103,29 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="retailPrice" layoutX="936.0" layoutY="151.0" prefHeight="65.0" prefWidth="392.0" promptText="Retail Price" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="150.0">
+                        <Label layoutX="1074.0" layoutY="370.0" prefWidth="400.0" text="This value's are numbers" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="370.0">
                            <font>
                               <Font size="30.0" />
                            </font>
-                        </TextField>
-                        <TextField fx:id="wholesalePrice" layoutX="1008.0" layoutY="230.0" prefHeight="65.0" prefWidth="392.0" promptText="Wholesale Price" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="223.0">
+                        </Label>
+                        <TextField fx:id="warrantyPeriod" layoutX="817.0" layoutY="419.0" prefHeight="44.0" prefWidth="300.0" promptText="Warranty Period " AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="420.0">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="Quantity" layoutX="943.0" layoutY="307.0" prefHeight="65.0" prefWidth="392.0" promptText="Quantity" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="297.0">
+                        <TextField fx:id="retailPrice" layoutX="817.0" layoutY="469.0" prefHeight="37.0" prefWidth="300.0" promptText="Retail Price" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="470.0">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="Quantity" layoutX="817.0" layoutY="519.0" prefHeight="37.0" prefWidth="300.0" promptText="Quantity" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="520.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="wholesalePrice" layoutX="817.0" layoutY="578.0" prefHeight="37.0" prefWidth="300.0" promptText="Wholesale Price" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="570.0">
+                           <font>
+                              <Font size="20.0" />
                            </font>
                         </TextField>
                      </children>
@@ -136,48 +136,67 @@
                <content>
                   <AnchorPane fx:id="addAccessory">
                      <children>
-                        <ImageView fitHeight="424.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
+                        <ImageView fx:id="accessoryImage" fitHeight="424.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
                            <image>
                               <Image url="https://i5.walmartimages.com/dfw/4ff9c6c9-d092/k2-_227c4119-b5df-41bd-a835-52152b10a46a.v1.png" />
                            </image>
                         </ImageView>
-                        <TextField layoutX="870.0" layoutY="174.0" prefHeight="65.0" prefWidth="392.0" promptText="Retail Price" AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="150.0">
+                        <TextField fx:id="accessoryName" layoutX="421.0" layoutY="172.0" prefHeight="65.0" prefWidth="392.0" promptText="Accessory Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="848.0" layoutY="545.0" prefHeight="65.0" prefWidth="392.0" promptText="Wholesale Price" AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="223.0">
+                        <ChoiceBox fx:id="type" layoutX="516.0" layoutY="25.0" prefHeight="37.0" prefWidth="300.0" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="30.0" />
+                        <TextField fx:id="accessorystatus" layoutX="832.0" layoutY="16.0" prefHeight="37.0" prefWidth="300.0" promptText="status" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="accessoryRetialPrice" layoutX="400.0" layoutY="331.0" prefHeight="65.0" prefWidth="392.0" promptText="Retail Price" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="331.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextArea layoutX="504.0" layoutY="589.0" prefHeight="339.0" prefWidth="294.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="200.0" />
+                        <TextField fx:id="accessoryQuantity" layoutX="820.0" layoutY="329.0" prefHeight="65.0" prefWidth="392.0" promptText="Quantity" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="331.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="accessorywholesalePrice" layoutX="400.0" layoutY="417.0" prefHeight="65.0" prefWidth="392.0" promptText="Wholesale Price" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="417.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
                         <Label layoutX="479.0" layoutY="165.0" text="Description" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="150.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Button layoutX="1518.0" layoutY="913.0" mnemonicParsing="false" text="Add Accessory" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+                        <TextField fx:id="accessoryDescription" alignment="TOP_LEFT" layoutX="400.0" layoutY="201.0" maxWidth="572.0" prefHeight="66.0" prefWidth="572.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="201.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="1518.0" layoutY="913.0" mnemonicParsing="false" onAction="#addAccessoryOnAction" text="Add Accessory" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <TextField layoutX="915.0" layoutY="372.0" prefHeight="65.0" prefWidth="392.0" promptText="Quantity" AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="297.0">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </TextField>
-                        <TextField layoutX="421.0" layoutY="172.0" prefHeight="65.0" prefWidth="392.0" promptText="Accessoty Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </TextField>
-                        <ChoiceBox layoutX="516.0" layoutY="25.0" prefHeight="37.0" prefWidth="300.0" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="30.0" />
                         <Label layoutX="446.0" layoutY="25.0" text="Type" AnchorPane.leftAnchor="446.0" AnchorPane.topAnchor="30.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
+                        <Label layoutX="400.0" layoutY="281.0" prefWidth="400.0" text="This value's are numbers" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="281.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="1538.0" layoutY="986.0" mnemonicParsing="false" onAction="#clearAccessory" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="300.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </content>

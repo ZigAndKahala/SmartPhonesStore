@@ -76,24 +76,6 @@ public class signUpController {
         alert.setTitle("Info");
         alert.setContentText("Your user ID is : " + mCid);
         alert.showAndWait();
-    }
+}
 
-    private static void refresh() {
-        try {
-            DatabaseAPI db = new DatabaseAPI();
-            String sql = "Select * from customer";
-
-            ResultSet result = db.read(sql);
-            StringBuilder emps = new StringBuilder();
-            while(result.next()){
-                emps.append(result.getString(1)).append("\t").append(result.getString(2)).append("\t").append(result.getString(3)).append("\n");
-            }
-            System.out.println(emps);
-            db.connection.close();
-            db.connection = null;
-        } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 }

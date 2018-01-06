@@ -20,7 +20,7 @@ public class DatabaseAPI {
 
     public void startConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/phonesstore", "root", "lenovo15");
+                "jdbc:mysql://localhost:3306/phonesstore", "root", "root");
     }
 
     public ResultSet read(String sql) throws SQLException {
@@ -46,7 +46,7 @@ public class DatabaseAPI {
     public static String convertToSqlFormat(List<Object> listOfInputs){
         StringBuilder sqlFormat = new StringBuilder("(");
         for (Object object : listOfInputs){
-            if (object instanceof Integer){
+            if (object instanceof Integer || object instanceof Double || object instanceof Float){
                 sqlFormat.append(object);
             }else if(object instanceof String){
                 sqlFormat.append("\"").append(object).append("\"");
