@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.time.LocalDate;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class employeeController {
+    public TextField phoneLink;
+    public TextField accessoryLink;
     private int eid;
 
     public Button signOutButton;
@@ -45,7 +48,7 @@ public class employeeController {
     public TextField wholesalePrice;
     public TextField Quantity;
     public TextField description;
-    public ImageView imageview;
+    public ImageView phoneImage;
     
     
     public TextField accessoryName;
@@ -68,6 +71,8 @@ public class employeeController {
 
 
     ObservableList<String> mainTypeList = FXCollections.observableArrayList("Cases","Smart Watches","Bluetooth Headsets","Cables & Adapters","Screen Protectors","Chargers & Cradles","Bluetooth Portable Speakers","Car Mounts","Batteries","Screen Digitizers");
+    private boolean isImageLinkValid;
+
     public void initialize(){
         anchor.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
         addPhone.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
@@ -87,18 +92,25 @@ public class employeeController {
     }
 
     public void addPhoneAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException  {
-
+        String reldate = null;
         LocalDate localDate = releaseDate.getValue();
-        String reldate = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
-        List<Object> parameters = new ArrayList<>();
+        if(localDate != null) {
+            reldate = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
+        }
+
+        if(checkImage(phoneLink.getText()) == null){
+            return;
+        }
+
+        List<String> parameters = new ArrayList<>();
         parameters.add(phoneName.getText());
         parameters.add(phoneVersion.getText());
         parameters.add(description.getText());
-        parameters.add(Double.parseDouble(wholesalePrice.getText()));
+        parameters.add(wholesalePrice.getText());
         parameters.add(status.getText());
-        parameters.add(Double.parseDouble(retailPrice.getText()));
-        parameters.add(Double.parseDouble(Quantity.getText()));
-        parameters.add(Double.parseDouble(warrantyPeriod.getText()));
+        parameters.add(retailPrice.getText());
+        parameters.add(Quantity.getText());
+        parameters.add(warrantyPeriod.getText());
         parameters.add(reldate);
         parameters.add(weightThikness.getText());
         parameters.add(OsVersion.getText());
@@ -107,9 +119,11 @@ public class employeeController {
         parameters.add(cameraPhotoResolution.getText());
         parameters.add(RAMAndChipset.getText());
         parameters.add(BatteryCapacity.getText());
+        parameters.add(phoneLink.getText());
+
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
-        databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,description,wholesalePrice,status,retailPrice,Quantity,warrantyPeriod,releasDate,weightAndThikness,OSVersion,storageAndSDSlot,screenSizeAndResolution,CameraPhotoAndVideo,RAMAndChipset,batteryCapacityAndTechnology",parameters));
+        databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,description,wholesalePrice,status,retailPrice,Quantity,warrantyPeriod,releasDate,weightAndThikness,OSVersion,storageAndSDSlot,screenSizeAndResolution,CameraPhotoAndVideo,RAMAndChipset,batteryCapacityAndTechnology,imageLink",parameters));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setContentText("Done ^_^");
@@ -119,7 +133,7 @@ public class employeeController {
     }
 
     public void clearAction(ActionEvent actionEvent) {
-        imageview.setImage(null);
+        phoneImage.setImage(null);
         phoneName.setText("");
         phoneVersion.setText("");
         releaseDate.setValue(null);
@@ -141,19 +155,25 @@ public class employeeController {
     }
 
     public void addAccessoryOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        List<Object> parameters = new ArrayList<>();
+
+        if(checkImage(accessoryLink.getText()) == null){
+            return;
+        }
+
+        List<String> parameters = new ArrayList<>();
         String typeIs;
         typeIs = (String) type.getValue();
         parameters.add(accessoryName.getText());
         parameters.add(accessoryDescription.getText());
-        parameters.add(Double.parseDouble(accessorywholesalePrice.getText()));
-        parameters.add(Double.parseDouble(accessoryQuantity.getText()));
-        parameters.add(Double.parseDouble(accessoryRetialPrice.getText()));
+        parameters.add(accessorywholesalePrice.getText());
+        parameters.add(accessoryQuantity.getText());
+        parameters.add(accessoryRetialPrice.getText());
         parameters.add(typeIs);
         parameters.add(accessorystatus.getText());
+        parameters.add(accessoryLink.getText());
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
-       databaseAPI.write("INSERT INTO others " + DatabaseAPI.generateSqlCommand("name,description,wholesalePrice,quantity,retailPrice,type,status",parameters));
+        databaseAPI.write("INSERT INTO others " + DatabaseAPI.generateSqlCommand("name,description,wholesalePrice,quantity,retailPrice,type,status,imageLink",parameters));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setContentText("Done ^_^");
@@ -177,20 +197,35 @@ public class employeeController {
         String stardate = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
         LocalDate localDate1 = finishDate.getValue();
         String finisdate = localDate1.getYear() + "-" + localDate1.getMonthValue() + "-" + localDate1.getDayOfMonth();
-        List<Object> parameters = new ArrayList<>();
+        List<String> parameters = new ArrayList<>();
         parameters.add(stardate);
         parameters.add(finisdate);
-        parameters.add(Double.parseDouble(promotionPercentage.getText()));
-
+        parameters.add(promotionPercentage.getText());
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
+
+
+
         databaseAPI.write("INSERT INTO promotions " + DatabaseAPI.generateSqlCommand("startDate,endDate,percentage",parameters));
+
+        ResultSet proId = databaseAPI.read("SELECT max(proId) FROM promotions");
+        proId.next();
+        int proID = proId.getInt(1);
+
+        if(phoneRadioButton.isSelected()) {
+            String phoneName2 = (String) producrIs.getValue();
+            String phoneName = phoneName2.split(" ")[0];
+            databaseAPI.write("UPDATE phone SET proId = " + proID + " WHERE name = \"" + phoneName + "\"");
+        }else {
+            String accessoryFullName = (String) producrIs.getValue();
+            String accessoryFirstName = accessoryFullName.split(" ")[0];
+            databaseAPI.write("UPDATE others SET proId = " + proID + " WHERE name = \"" + accessoryFirstName + "\"");
+        }
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setContentText("Done ^_^");
         alert.showAndWait();
-
-
     }
 
     public void addProductPhone(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -203,9 +238,10 @@ public class employeeController {
         int mpid = maxpid.getInt("max(pid)");
         String[] phonesH = new String[mpid];
         ResultSet phname = databaseAPI.read("SELECT name from phone;");
-        while(phname.next())
+        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone;");
+        while(phname.next() && phVersion.next())
         {
-            phonesH[count] =phname.getString("name");
+            phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
             count+=1;
         }
         ObservableList<String> mainTypeListphone = FXCollections.observableArrayList(phonesH);
@@ -223,9 +259,10 @@ public class employeeController {
         int moid = maxoid.getInt("max(otherId)");
         String[] accessoriesH = new String[moid];
         ResultSet acname = databaseAPI.read("SELECT name from others;");
-        while(acname.next())
+        ResultSet acType = databaseAPI.read("SELECT type from others;");
+        while(acname.next() && acType.next())
         {
-            accessoriesH[count] =acname.getString("name");
+            accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
             count+=1;
         }
         ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(accessoriesH);
@@ -236,5 +273,24 @@ public class employeeController {
 
     public void setEid(int eid) {
         this.eid = eid;
+    }
+
+    public void loadPhoneImage(ActionEvent actionEvent) {
+        phoneImage.setImage(checkImage(phoneLink.getText()));
+    }
+
+    public void loadAccessoryImage(ActionEvent actionEvent) {
+        accessoryImage.setImage(checkImage(accessoryLink.getText()));
+    }
+
+    private Image checkImage(String URL){
+        Image image = new Image(URL);
+        if (image.isError()) {
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Invalid Image URL!!", 1, 40), (Stage) phoneImage.getScene().getWindow());
+            isImageLinkValid = false;
+            return null;
+        }
+        isImageLinkValid = true;
+        return image;
     }
 }

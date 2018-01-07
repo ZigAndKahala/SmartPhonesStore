@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,6 +36,7 @@ public class DatabaseAPI {
         startConnection();
         Statement statement = connection.createStatement();
 
+        System.out.println(sql);
         int x = statement.executeUpdate(sql);
         connection.close();
         connection = null;
@@ -47,7 +47,7 @@ public class DatabaseAPI {
         StringBuilder sqlFormat = new StringBuilder("(");
         for (String string : listOfInputs){
             if(!string.equals("")){
-                if(!isStringFilledWithNumbers(string))
+                if(!isNumber(string))
                     sqlFormat.append("\"").append(string).append("\",");
                 else
                     sqlFormat.append(string).append(",");
@@ -74,10 +74,13 @@ public class DatabaseAPI {
         return sqlFormat.toString();
     }
 
-    private static Boolean isStringFilledWithNumbers(String string){
+    private static Boolean isNumber(String string){
+        int numberOfDots = 0;
         for(Character character : string.toCharArray())
-            if(!Character.isDigit(character))
+            if(!Character.isDigit(character) && character != '.')
                 return false;
-        return true;
+            else if(character == '.')
+                numberOfDots++;
+        return numberOfDots == 1 || numberOfDots == 0;
     }
 }

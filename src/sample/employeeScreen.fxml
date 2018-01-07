@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
+<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
    <children>
       <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <tabs>
@@ -37,9 +37,9 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <ImageView fx:id="imageview" fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
+                        <ImageView fx:id="phoneImage" fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="150.0">
                            <image>
-                              <Image url="https://cdn2.gsmarena.com/vv/bigpic/lg-v30-.jpg" />
+                              <Image url="https://cdn3.iconfinder.com/data/icons/smartcons/96/Question-512.png" />
                            </image>
                         </ImageView>
                         <DatePicker fx:id="releaseDate" layoutX="1029.0" layoutY="642.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="160.0" />
@@ -129,6 +129,21 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
+                        <Label layoutX="50.0" layoutY="648.0" text="Enter Image Link" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="650.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="phoneLink" layoutX="229.0" layoutY="649.0" prefHeight="37.0" prefWidth="700.0" promptText="URL" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="650.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="979.0" layoutY="649.0" mnemonicParsing="false" onAction="#loadPhoneImage" text="Load Image" AnchorPane.leftAnchor="979.0" AnchorPane.topAnchor="649.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </content>
@@ -196,6 +211,21 @@
                         <Button layoutX="1538.0" layoutY="986.0" mnemonicParsing="false" onAction="#clearAccessory" text="Clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="300.0">
                            <font>
                               <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="43.0" layoutY="572.0" text="Enter Image Link" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="570.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="accessoryLink" layoutX="43.0" layoutY="572.0" prefHeight="37.0" prefWidth="700.0" promptText="URL" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="570.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="967.0" layoutY="570.0" mnemonicParsing="false" onAction="#loadAccessoryImage" text="Load Image" AnchorPane.topAnchor="570.0">
+                           <font>
+                              <Font size="20.0" />
                            </font>
                         </Button>
                      </children>
