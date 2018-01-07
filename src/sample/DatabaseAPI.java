@@ -20,7 +20,7 @@ public class DatabaseAPI {
 
     public void startConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/phonesstore", "root", "lenovo15");
+                "jdbc:mysql://localhost:3306/mobilestore", "root", "lenovo15");
     }
 
     public ResultSet read(String sql) throws SQLException {
@@ -37,7 +37,6 @@ public class DatabaseAPI {
         startConnection();
         Statement statement = connection.createStatement();
 
-        System.out.println(sql);
         int x = statement.executeUpdate(sql);
         connection.close();
         connection = null;

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class signInController {
     public PasswordField password;
     public Button signIn;
     public TextField userId;
+    public AnchorPane rootPane;
 
     public void signIn(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = null;
