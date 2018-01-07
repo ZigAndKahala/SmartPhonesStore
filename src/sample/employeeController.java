@@ -9,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import java.time.LocalDate;
+import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +54,18 @@ public class employeeController {
     public TextField accessoryQuantity;
     public TextField accessoryDescription;
     public ImageView accessoryImage;
+    
+    
+    public RadioButton phoneRadioButton;
+    public ToggleGroup product;
+    public RadioButton accessorisRadioButton;
+    public TextField promotionPercentage;
+    public DatePicker finishDate;
+    public ChoiceBox producrIs;
+    public DatePicker startDate;
 
 
     ObservableList<String> mainTypeList = FXCollections.observableArrayList("Cases","Smart Watches","Bluetooth Headsets","Cables & Adapters","Screen Protectors","Chargers & Cradles","Bluetooth Portable Speakers","Car Mounts","Batteries","Screen Digitizers");
-
-
     public void initialize(){
         anchor.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
         addPhone.setPrefSize(Main.screenWidth, Main.screenHeight - 40);
@@ -158,6 +167,68 @@ public class employeeController {
         accessoryQuantity.setText("");
         accessoryDescription.setText("");
         accessoryImage.setImage(null);
+
+    }
+
+    public void addPromotion(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        LocalDate localDate = startDate.getValue();
+        String stardate = localDate.getYear() + "-" + localDate.getMonthValue() + "-" + localDate.getDayOfMonth();
+        LocalDate localDate1 = finishDate.getValue();
+        String finisdate = localDate1.getYear() + "-" + localDate1.getMonthValue() + "-" + localDate1.getDayOfMonth();
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(stardate);
+        parameters.add(finisdate);
+        parameters.add(Double.parseDouble(promotionPercentage.getText()));
+
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        databaseAPI.write("INSERT INTO promotions " + DatabaseAPI.generateSqlCommand("startDate,endDate,percentage",parameters));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setContentText("Done ^_^");
+        alert.showAndWait();
+
+
+    }
+
+    public void addProductPhone(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        int count=0;
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+
+        ResultSet maxpid = databaseAPI.read("SELECT max(pid) from phone;");
+        maxpid.next();
+        int mpid = maxpid.getInt("max(pid)");
+        String[] phonesH = new String[mpid];
+        ResultSet phname = databaseAPI.read("SELECT name from phone;");
+        while(phname.next())
+        {
+            phonesH[count] =phname.getString("name");
+            count+=1;
+        }
+        ObservableList<String> mainTypeListphone = FXCollections.observableArrayList(phonesH);
+        producrIs.setItems(mainTypeListphone);
+
+    }
+
+    public void addProductAccessory(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        int count=0,i;
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+
+        ResultSet maxoid = databaseAPI.read("SELECT max(otherId) from others;");
+        maxoid.next();
+        int moid = maxoid.getInt("max(otherId)");
+        String[] accessoriesH = new String[moid];
+        ResultSet acname = databaseAPI.read("SELECT name from others;");
+        while(acname.next())
+        {
+            accessoriesH[count] =acname.getString("name");
+            count+=1;
+        }
+        ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(accessoriesH);
+        producrIs.setItems(mainTypeListaccessories);
+
 
     }
 }
