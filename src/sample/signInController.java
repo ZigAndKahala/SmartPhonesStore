@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class signInController {
     public PasswordField password;
@@ -18,9 +20,39 @@ public class signInController {
     public TextField userId;
     public AnchorPane rootPane;
 
-    public void signIn(ActionEvent actionEvent) throws IOException {
+    private int userID;
+
+    public void signIn(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
+        if(password.getText().equals("") || userId.getText().equals("")){
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Please Fill All The Data",1,40),(Stage)password.getScene().getWindow());
+            return;
+        }
+
+        Boolean isUserIdNumber = true;
+
+        for (Character character : userId.getText().toCharArray()) {
+            if (!Character.isDigit(character)) {
+                isUserIdNumber = false;
+                break;
+            }
+        }
+
+        int determinant;
+
+        if (isUserIdNumber) {
+            determinant = userId.getText().length();
+            if(determinant != 3 && determinant != 4 && determinant != 8)
+                determinant = 2;
+            if (getUserId() == 1)
+                determinant = 2;
+        }else {
+            determinant = typeOfUser();
+        }
+
         FXMLLoader loader = null;
-        switch (userId.getText().length()){
+        switch (determinant){
+            case 1 : displayEmailError();return;
+            case 2 : displayIdError();return;
             case 3 : loader = new FXMLLoader(getClass().getResource("ownerScreen.fxml"));break;
             case 4 : loader = new FXMLLoader(getClass().getResource("employeeScreen.fxml"));break;
             case 8 : loader = new FXMLLoader(getClass().getResource("customerScreen.fxml"));break;
@@ -37,5 +69,66 @@ public class signInController {
         Parent root = loader.load();
         Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
         stage.setScene(scene);
+    }
+
+    private int typeOfUser() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet;
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        resultSet = databaseAPI.read("SELECT oid FROM owner WHERE email = \"" + userId.getText() + "\" && password = \"" + password.getText() + "\";");
+        if(resultSet.next()){
+            userID = resultSet.getInt(1);
+            return 3;
+        }
+
+        resultSet = databaseAPI.read("SELECT eid FROM employee WHERE email = \"" + userId.getText() + "\" && password = \"" + password.getText() + "\";");
+        if(resultSet.next()){
+            userID = resultSet.getInt(1);
+            return 4;
+        }
+
+        resultSet = databaseAPI.read("SELECT cid FROM customer WHERE email = \"" + userId.getText() + "\" && password = \"" + password.getText() + "\";");
+        if(resultSet.next()){
+            userID = resultSet.getInt(1);
+            return 8;
+        }
+
+        return 1;
+    }
+
+    private int getUserId() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet;
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        if (userId.getText().length() == 3){
+            resultSet = databaseAPI.read("SELECT oid FROM owner WHERE oid = " + userId.getText() + " && password = \"" + password.getText() + "\";");
+            if (resultSet.next()) {
+                userID = resultSet.getInt(1);
+                return 0;
+            }
+        }else if(userId.getText().length() == 4){
+            resultSet = databaseAPI.read("SELECT eid FROM employee WHERE eid = " + userId.getText() + " && password = \"" + password.getText() + "\";");
+            if (resultSet.next()) {
+                userID = resultSet.getInt(1);
+                return 0;
+            }
+        }else if (userId.getText().length() == 8){
+            resultSet = databaseAPI.read("SELECT cid FROM customer WHERE cid = " + userId.getText() + " && password = \"" + password.getText() + "\";");
+            if (resultSet.next()) {
+                userID = resultSet.getInt(1);
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    private void displayEmailError(){
+        PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Wrong Email Address Or Password",1,40),(Stage)password.getScene().getWindow());
+    }
+
+    private void displayIdError(){
+        PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Wrong User Id Or Password",1,40),(Stage)password.getScene().getWindow());
     }
 }
