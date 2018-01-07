@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ownerController {
+    private int oid;
+
     public TextField name;
     public TextField number;
     public TextField email;
@@ -42,5 +44,9 @@ public class ownerController {
         Parent root = loader.load();
         Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
         stage.setScene(scene);
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
     }
 }

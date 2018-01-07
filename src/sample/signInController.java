@@ -50,6 +50,7 @@ public class signInController {
         }
 
         FXMLLoader loader = null;
+        Object controller;
         switch (determinant){
             case 1 : displayEmailError();return;
             case 2 : displayIdError();return;
@@ -59,6 +60,14 @@ public class signInController {
         }
         Stage stage = (Stage) signIn.getScene().getWindow();
         Parent root = loader.load();
+
+        controller = loader.getController();
+        switch (determinant){
+            case 3 : ((ownerController)controller).setOid(userID);break;
+            case 4 : ((employeeController)controller).setEid(userID);break;
+            case 8 : ((customerController)controller).setCid(userID);break;
+        }
+
         Scene scene = new Scene(root,Main.screenWidth,Main.screenHeight);
         stage.setScene(scene);
     }

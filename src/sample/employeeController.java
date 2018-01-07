@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class employeeController {
+    private int eid;
+
     public Button signOutButton;
     public TabPane tabPane;
 
@@ -85,5 +87,9 @@ public class employeeController {
         wholesalePrice.setText("");
         Quantity.setText("");
 
+    }
+
+    public void setEid(int eid) {
+        this.eid = eid;
     }
 }
