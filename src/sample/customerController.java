@@ -21,6 +21,13 @@ import java.util.Date;
 import java.util.List;
 
 public class customerController {
+    public AnchorPane accessoryPane;
+    public ImageView accessoryImage;
+    public TextField acsName;
+    public TextField acsType;
+    public TextField acsPrice;
+    public TextField acsQuantity;
+    public TextField acsPromotion;
     private int cid;
 
     public Label releaseDate;
@@ -239,5 +246,13 @@ public class customerController {
         databaseAPI.write("Insert Into reservePhone (cid,pid,reserveDate,isCompleted) Values " + DatabaseAPI.convertToSqlFormat(reserveData));
 
         PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Reserving Process Completed Successfully",0,30),(Stage)phonePane.getScene().getWindow());
+    }
+
+    public void buyAccessory(ActionEvent actionEvent) {
+
+    }
+
+    public void reserveAccessory(ActionEvent actionEvent) {
+
     }
 }
