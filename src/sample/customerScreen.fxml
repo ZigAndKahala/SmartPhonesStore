@@ -23,94 +23,106 @@
                <content>
                   <AnchorPane fx:id="addPhone">
                      <children>
-                        <Pane fx:id="phonePane" layoutX="24.0" layoutY="302.0" prefHeight="532.0" prefWidth="1733.0" visible="false" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="302.0">
-                           <children>
-                               <ImageView fitHeight="424.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
-                                   <Image url="https://cdn2.gsmarena.com/vv/bigpic/lg-v30-.jpg" />
-                               </ImageView>
-                              <Label layoutX="380.0" text="Released">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="weightThickness" layoutX="380.0" layoutY="50.0" prefHeight="37.0" prefWidth="434.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="OsVersion" layoutX="380.0" layoutY="100.0" prefHeight="37.0" prefWidth="434.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="storageSdSlot" layoutX="380.0" layoutY="150.0" prefHeight="37.0" prefWidth="434.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="screenSizeInInches" layoutX="380.0" layoutY="270.0" prefHeight="65.0" prefWidth="319.0" promptText="Screen Size In Inches">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="screenSizeInPixels" layoutX="380.0" layoutY="340.0" prefHeight="44.0" prefWidth="319.0" promptText="Screen Size In Pixels">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="cameraPhotoResolution" layoutX="741.0" layoutY="271.0" prefHeight="65.0" prefWidth="425.0" promptText="Camera Photo Resolution MP">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="cameraVideoResolution" layoutX="741.0" layoutY="340.0" prefHeight="44.0" prefWidth="425.0" promptText="Camera Video Resolution P">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="ram" layoutX="1200.0" layoutY="271.0" prefHeight="65.0" prefWidth="106.0" promptText="RAM">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="chipSet" layoutX="1200.0" layoutY="341.0" prefHeight="44.0" prefWidth="106.0" promptText="Chipset">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="BatteryCapacity" layoutX="1347.0" layoutY="269.0" prefHeight="65.0" prefWidth="253.0" promptText="Battery Capacity">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </TextField>
-                              <TextField layoutX="1347.0" layoutY="342.0" prefHeight="44.0" prefWidth="253.0" promptText="Battery Technology">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="phoneName" editable="false" layoutX="900.0" prefHeight="65.0" prefWidth="467.0">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </TextField>
-                              <Button layoutX="1638.0" layoutY="455.0" mnemonicParsing="false" text="Buy">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="1489.0" layoutY="455.0" mnemonicParsing="false" text="Reserve">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
                         <ChoiceBox fx:id="choosePhone" layoutX="357.0" layoutY="79.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="341.0" AnchorPane.topAnchor="79.0" />
                         <Label layoutX="75.0" layoutY="67.0" text="Choose Phone" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="67.0">
                            <font>
                               <Font size="40.0" />
                            </font>
                         </Label>
+                        <Button layoutX="660.0" layoutY="79.0" mnemonicParsing="false" onAction="#viewSelectedPhone" text="View">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <AnchorPane fx:id="phonePane" layoutX="64.0" layoutY="198.0">
+                           <children>
+                              <ImageView fx:id="phoneImage" fitHeight="424.0" fitWidth="320.0" layoutX="79.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <image>
+                                    <Image url="https://cdn3.iconfinder.com/data/icons/smartcons/96/Question-512.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="releaseDate" layoutX="562.0" layoutY="225.0" text="Release Date" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="weightAndThickness" editable="false" layoutX="534.0" layoutY="195.0" prefHeight="37.0" prefWidth="300.0" promptText="weight, thiknees" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="50.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="OsVersion" editable="false" layoutX="426.0" layoutY="252.0" prefHeight="37.0" prefWidth="300.0" promptText="OS Version" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="100.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="storageSdSlot" editable="false" layoutX="429.0" layoutY="323.0" prefHeight="37.0" prefWidth="300.0" promptText="Storage, SD Slot" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="150.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="RAMAndChipSet" editable="false" layoutX="1157.0" layoutY="175.0" prefHeight="44.0" prefWidth="380.0" promptText="RAM and Chipset" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="50.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="status" editable="false" layoutX="1157.0" layoutY="225.0" prefHeight="37.0" prefWidth="380.0" promptText="Status" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="100.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="screenSizeAndResolution" editable="false" layoutX="416.0" layoutY="420.0" prefHeight="37.0" prefWidth="380.0" promptText="Screen Size And Resolution" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="200.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="cameraPhotoResolution" editable="false" layoutX="820.0" layoutY="567.0" prefHeight="37.0" prefWidth="380.0" promptText="Camera Photo and Video Resolution MP" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="250.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="BatteryCapacity" editable="false" layoutX="1548.0" layoutY="419.0" prefHeight="37.0" prefWidth="380.0" promptText="Battery Capacity and Technology" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="300.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="description" editable="false" layoutX="1100.0" layoutY="504.0" prefHeight="100.0" prefWidth="380.0" promptText="Description" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="150.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="warrantyPeriod" editable="false" layoutX="817.0" layoutY="419.0" prefHeight="44.0" prefWidth="300.0" promptText="Warranty Period " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="450.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="quantity" editable="false" layoutX="817.0" layoutY="519.0" prefHeight="37.0" prefWidth="300.0" promptText="Quantity" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="450.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="wholesalePrice" editable="false" layoutX="817.0" layoutY="578.0" prefHeight="37.0" prefWidth="300.0" promptText="Wholesale Price" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="450.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </TextField>
+                              <Button layoutX="1504.0" layoutY="826.0" mnemonicParsing="false" onAction="#buy" text="Buy" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="600.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#reserve" text="Reserve" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="100.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="promotion" editable="false" layoutX="69.0" layoutY="490.0" prefHeight="65.0" prefWidth="649.0" promptText="Warranty Period " AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
@@ -119,12 +131,12 @@
                   <content>
                       <Pane prefHeight="200.0" prefWidth="200.0">
                           <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="choose accessories">
+                              <Label layoutX="60.0" layoutY="67.0" text="choose accessories">
                                   <font>
                                       <Font size="41.0" />
                                   </font>
                               </Label>
-                              <ComboBox layoutX="416.0" layoutY="25.0" prefHeight="38.0" prefWidth="240.0" />
+                              <ComboBox fx:id="chooseAccessory" layoutX="420.0" layoutY="79.0" prefHeight="38.0" prefWidth="300.0" />
                               <Button layoutX="1120.0" layoutY="880.0" mnemonicParsing="false" text="Buy">
                                   <font>
                                       <Font size="39.0" />
