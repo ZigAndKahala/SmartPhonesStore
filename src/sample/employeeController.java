@@ -10,6 +10,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class employeeController {
@@ -77,7 +81,7 @@ public class employeeController {
     public ChoiceBox producrIs;
     public DatePicker startDate;
 
-
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     ObservableList<String> mainTypeList = FXCollections.observableArrayList("Cases","Smart Watches","Bluetooth Headsets","Cables & Adapters","Screen Protectors","Chargers & Cradles","Bluetooth Portable Speakers","Car Mounts","Batteries","Screen Digitizers");
     private boolean isImageLinkValid;
 
@@ -113,18 +117,15 @@ public class employeeController {
         String phnam = phoneName.getText();
         String phvar = phoneVersion.getText();
         DatabaseAPI databaseAPI = new DatabaseAPI();
-        ResultSet resultSet00 = databaseAPI.read("select pid from phone where name = \"" + phnam +  "\" && phoneVersion = \"" + phvar + "\"" );
+        ResultSet resultSet00 = databaseAPI.read("select pid from phone where name = \"" + phnam +  "\" && phoneVersion = \"" + phvar + "\"" + " && imageLink IS NOT NULL");
         if(resultSet00.next())
         {
 
             int pid = resultSet00.getInt(1);
-            int q = Integer.parseInt(Quantity.getText());
-            ResultSet qbefore= databaseAPI.read("select quantity from phone where pid =" + pid );
-            qbefore.next();
-            int q1 = qbefore.getInt(1);
-            int q2=q+q1;
-            databaseAPI.write("UPDATE phone SET quantity = " + q2 + " WHERE pid = " + pid );
-
+            if(!Quantity.getText().equals("")) {
+                int q = Integer.parseInt(Quantity.getText());
+                databaseAPI.write("UPDATE phone SET quantity = " + q + " WHERE pid = " + pid);
+            }
 
             if(!description.getText().equals("")){
                 databaseAPI.write("UPDATE phone SET description = \"" + description.getText() +"\" WHERE pid = " + pid);
@@ -136,12 +137,12 @@ public class employeeController {
             if(!status.getText().equals("")){
                 databaseAPI.write("UPDATE phone SET status = \"" + status.getText() + "\" WHERE pid = " + pid );
             }
-            int retial = Integer.parseInt(retailPrice.getText());
             if(!retailPrice.getText().equals("")){
+                int retial = Integer.parseInt(retailPrice.getText());
                 databaseAPI.write("UPDATE phone SET retailPrice = " + retial + " WHERE pid = " + pid);
             }
-            int wp = Integer.parseInt(warrantyPeriod.getText());
             if(!warrantyPeriod.getText().equals("")){
+                int wp = Integer.parseInt(warrantyPeriod.getText());
                 databaseAPI.write("UPDATE phone SET warrantyPeriod = " + wp + " WHERE pid = " + pid );
             }
             if(!reldate.equals("")){
@@ -185,6 +186,8 @@ public class employeeController {
             parameters.add(Quantity.getText());
             parameters.add(warrantyPeriod.getText());
             parameters.add(reldate);
+            Date date = new Date();
+            parameters.add(dateFormat.format(date));
             parameters.add(weightThikness.getText());
             parameters.add(OsVersion.getText());
             parameters.add(storageSdSlot.getText());
@@ -195,7 +198,8 @@ public class employeeController {
             parameters.add(phoneLink.getText());
 
 
-            databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,description,wholesalePrice,status,retailPrice,Quantity,warrantyPeriod,releasDate,weightAndThikness,OSVersion,storageAndSDSlot,screenSizeAndResolution,CameraPhotoAndVideo,RAMAndChipset,batteryCapacityAndTechnology,imageLink", parameters));
+
+            databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,description,wholesalePrice,status,retailPrice,Quantity,warrantyPeriod,releasDate,addedDate,weightAndThikness,OSVersion,storageAndSDSlot,screenSizeAndResolution,CameraPhotoAndVideo,RAMAndChipset,batteryCapacityAndTechnology,imageLink", parameters));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Info");
             alert.setContentText("Done ^_^");
@@ -231,25 +235,54 @@ public class employeeController {
         if(checkImage(accessoryLink.getText()) == null){
             return;
         }
-
-        List<String> parameters = new ArrayList<>();
-        String typeIs;
-        typeIs = (String) type.getValue();
-        parameters.add(accessoryName.getText());
-        parameters.add(accessoryDescription.getText());
-        parameters.add(accessorywholesalePrice.getText());
-        parameters.add(accessoryQuantity.getText());
-        parameters.add(accessoryRetialPrice.getText());
-        parameters.add(typeIs);
-        parameters.add(accessorystatus.getText());
-        parameters.add(accessoryLink.getText());
-
+        String phnam = accessoryName.getText();
+        String typeIs = (String) type.getValue();
         DatabaseAPI databaseAPI = new DatabaseAPI();
-        databaseAPI.write("INSERT INTO others " + DatabaseAPI.generateSqlCommand("name,description,wholesalePrice,quantity,retailPrice,type,status,imageLink",parameters));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setContentText("Done ^_^");
-        alert.showAndWait();
+        ResultSet resultSet00 = databaseAPI.read("select otherId from others where name = \"" + phnam +  "\" && type = \"" + typeIs + "\"" + " && imageLink IS NOT NULL");
+        if(resultSet00.next()){
+            int otherId = resultSet00.getInt(1);
+            if(!accessoryQuantity.getText().equals("")) {
+                int q = Integer.parseInt(accessoryQuantity.getText());
+                databaseAPI.write("UPDATE others SET quantity = " + q + " WHERE otherId = " + otherId);
+            }
+
+            if(!accessoryDescription.getText().equals("")){
+                databaseAPI.write("UPDATE others SET description = \"" + accessoryDescription.getText() +"\" WHERE otherId = " + otherId);
+            }
+            if(!accessorywholesalePrice.getText().equals("")){
+                int wp = Integer.parseInt(accessorywholesalePrice.getText());
+                databaseAPI.write("UPDATE others SET wholesalePrice = " + wp + " WHERE otherId = " + otherId);
+            }
+            if(!accessorystatus.getText().equals("")){
+                databaseAPI.write("UPDATE others SET status = \"" + accessorystatus.getText() + "\"  WHERE otherId = " + otherId);
+
+            }
+            if(!accessoryRetialPrice.getText().equals("")){
+                int retial = Integer.parseInt(accessoryRetialPrice.getText());
+                databaseAPI.write("UPDATE phone SET retailPrice = " + retial + " WHERE otherID = " + otherId);
+            }
+
+        }
+        else {
+            List<String> parameters = new ArrayList<>();
+            parameters.add(accessoryName.getText());
+            parameters.add(accessoryDescription.getText());
+            parameters.add(accessorywholesalePrice.getText());
+            parameters.add(accessoryQuantity.getText());
+            parameters.add(accessoryRetialPrice.getText());
+            parameters.add(typeIs);
+            parameters.add(accessorystatus.getText());
+            Date date = new Date();
+            parameters.add(dateFormat.format(date));
+            parameters.add(accessoryLink.getText());
+
+            databaseAPI = new DatabaseAPI();
+            databaseAPI.write("INSERT INTO others " + DatabaseAPI.generateSqlCommand("name,description,wholesalePrice,quantity,retailPrice,type,status,addedDate,imageLink", parameters));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setContentText("Done ^_^");
+            alert.showAndWait();
+        }
     }
 
     public void clearAccessory(ActionEvent actionEvent) {
@@ -366,12 +399,86 @@ public class employeeController {
         return image;
     }
 
-    public void addProductPhone1(ActionEvent actionEvent) {
+    public void addProductPhone1(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        int count=0;
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+
+        ResultSet maxpid = databaseAPI.read("SELECT max(pid) from phone;");
+        maxpid.next();
+        int mpid = maxpid.getInt("max(pid)");
+        String[] phonesH = new String[mpid];
+        ResultSet phname = databaseAPI.read("SELECT name from phone;");
+        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone;");
+        while(phname.next() && phVersion.next())
+        {
+            phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
+            count+=1;
+        }
+        ObservableList<String> mainTypeListphone = FXCollections.observableArrayList(phonesH);
+        producrIs1.setItems(mainTypeListphone);
+
     }
 
-    public void addProductAccessory1(ActionEvent actionEvent) {
+    public void addProductAccessory1(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        int count=0,i;
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+
+        ResultSet maxoid = databaseAPI.read("SELECT max(otherId) from others;");
+        maxoid.next();
+        int moid = maxoid.getInt("max(otherId)");
+        String[] accessoriesH = new String[moid];
+        ResultSet acname = databaseAPI.read("SELECT name from others;");
+        ResultSet acType = databaseAPI.read("SELECT type from others;");
+        while(acname.next() && acType.next())
+        {
+            accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
+            count+=1;
+        }
+        ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(accessoriesH);
+        producrIs1.setItems(mainTypeListaccessories);
+
     }
 
-    public void addQuantity(ActionEvent actionEvent) {
+    public void addQuantity(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+
+
+        if(phoneRadioButton1.isSelected()) {
+            List<String> parameters = new ArrayList<>();
+            String phoneName2 = (String) producrIs.getValue();
+            String phoneName = phoneName2.split(" ")[0];
+            String phoneTypp = phoneName2.split(" ")[1];
+            parameters.add(phoneName);
+            parameters.add(phoneTypp);
+            parameters.add(wholsalePrice1.getText());
+            parameters.add(retialPrice1.getText());
+            parameters.add(addedQuantity.getText());
+            Date date = new Date();
+            parameters.add(dateFormat.format(date));
+
+            databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,wholesalePrice,retailPrice,Quantity,addedDate", parameters));
+        }else {
+            List<String> parameters = new ArrayList<>();
+            String accessoryFullName = (String) producrIs.getValue();
+            String accessoryFirstName = accessoryFullName.split(" ")[0];
+            String accessorysecondName = accessoryFullName.split(" ")[1];
+            parameters.add(accessoryFirstName);
+            parameters.add(wholsalePrice1.getText());
+            parameters.add(addedQuantity.getText());
+            parameters.add(retialPrice1.getText());
+            parameters.add(accessorysecondName);
+            Date date = new Date();
+            parameters.add(dateFormat.format(date));
+            databaseAPI.write("INSERT INTO others " + DatabaseAPI.generateSqlCommand("name,wholesalePrice,retailPrice,Quantity,type,addedDate", parameters));
+            }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setContentText("Done ^_^");
+        alert.showAndWait();
     }
 }
