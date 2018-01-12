@@ -25,7 +25,7 @@ public class DatabaseAPI {
     public ResultSet read(String sql) throws SQLException {
         startConnection();
         Statement statement = connection.createStatement();
-
+        System.out.println(sql);
         // Execute a statement
         ResultSet resultSet = statement.executeQuery(sql);
 

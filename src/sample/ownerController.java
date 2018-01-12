@@ -101,21 +101,27 @@ public class ownerController {
     public void addSalary(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
         List<String> parameters = new ArrayList<>();
-        parameters.add(day.getText());
+        String s = day.getText();
+        parameters.add(s);
         parameters.add(salaty.getText());
         DatabaseAPI databaseAPI = new DatabaseAPI();
         databaseAPI.write("INSERT INTO salary " + DatabaseAPI.generateSqlCommand("paymentDay,salaryAmount",parameters));
 
-        ResultSet sId = databaseAPI.read("SELECT max(sid) FROM promotions");
+        ResultSet sId = databaseAPI.read("SELECT max(sid) FROM salary");
         sId.next();
         int sid = sId.getInt(1);
         String nameEmpis = (String) employees.getValue();
-        ResultSet eId = databaseAPI.read("SELECT eid FROM employee where name= \" " + nameEmpis + "\"");
+
+        ResultSet eId = databaseAPI.read("SELECT eid FROM employee where name= \"" + nameEmpis +"\"");
          eId.next();
-         int eid = eId.getInt(1);
-        databaseAPI.write("UPDATE salary SET eid = " + eid + " WHERE sid = " + sid );
+         int ee = eId.getInt(1);
+        databaseAPI.write("UPDATE salary SET eid = " + ee + " WHERE sid = " + sid );
         databaseAPI.write("UPDATE salary SET oid = " + oid + " WHERE sid = " + sid );
 
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Info");
+        alert1.setContentText("Done ^_^");
+        alert1.showAndWait();
 
 
     }
