@@ -31,6 +31,11 @@ public class employeeController {
     public ChoiceBox producrIs1;
     public ToggleGroup product1;
     public ToggleGroup product2;
+    public ChoiceBox producrIs2;
+    public RadioButton phoneRadioButton2;
+    public ToggleGroup product11;
+    public RadioButton accessorisRadioButton2;
+    public ToggleGroup product21;
     private int eid;
 
     public Button signOutButton;
@@ -373,5 +378,8 @@ public class employeeController {
     }
 
     public void addQuantity(ActionEvent actionEvent) {
+    }
+
+    public void deletePhone(ActionEvent actionEvent) {
     }
 }

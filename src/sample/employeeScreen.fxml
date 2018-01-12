@@ -331,6 +331,37 @@
                   </AnchorPane>
               </content>
             </Tab>
+            <Tab text="Delete Phone">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="26.0" layoutY="44.0" text="Select Product" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="producrIs2" layoutX="418.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="100.0" />
+                        <RadioButton fx:id="phoneRadioButton2" layoutX="277.0" layoutY="127.0" mnemonicParsing="false" onAction="#addProductPhone1" text="Phone" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="product11" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="accessorisRadioButton2" layoutX="144.0" layoutY="166.0" mnemonicParsing="false" onAction="#addProductAccessory1" text="Accessories" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="30.0">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="product21" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </RadioButton>
+                        <Button layoutX="488.0" layoutY="101.0" mnemonicParsing="false" onAction="#deletePhone" text="Delete" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="100.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Button fx:id="signOutButton" mnemonicParsing="false" onAction="#signOut" text="Sign Out" textFill="RED" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
