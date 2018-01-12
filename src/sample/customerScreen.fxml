@@ -196,16 +196,20 @@
                       </Pane>
                   </content>
               </Tab>
-              <Tab text="your purchase">
+              <Tab onSelectionChanged="#selectionChanged" text="your purchase">
                   <content>
                       <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="1033.0" prefWidth="1920.0">
+                        <TableView fx:id="acsPurchase" layoutX="960.0" prefHeight="1033.0" prefWidth="960.0">
+                           <columns>
+                              <TableColumn fx:id="acessNameClmn" prefWidth="480.0" text="Accessories" />
+                              <TableColumn fx:id="acessBuyDateClmn" prefWidth="480.0" text="Date of buy" />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="phonePurchase" prefHeight="1033.0" prefWidth="960.0">
                           <columns>
-                            <TableColumn prefWidth="480.0" text="Phones" />
-                              <TableColumn prefWidth="480.0" text="Date of buy" />
-                            <TableColumn prefWidth="480.0" text="Accessories" />
-                              <TableColumn prefWidth="480.0" text="Date of buy" />
+                            <TableColumn fx:id="phoneClmn" prefWidth="480.0" text="Phones" />
+                              <TableColumn fx:id="phoneBuyDateClmn" prefWidth="480.0" text="Date of buy" />
                           </columns>
                         </TableView>
                      </children>

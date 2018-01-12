@@ -1,8 +1,12 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -17,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class customerController {
     public AnchorPane accessoryPane;
@@ -29,6 +32,12 @@ public class customerController {
     public TextField acsPromotion;
     public TextField acsDescription;
     public TextField acsStatus;
+    public TableView acsPurchase;
+    public TableView phonePurchase;
+    public TableColumn phoneClmn;
+    public TableColumn phoneBuyDateClmn;
+    public TableColumn acessNameClmn;
+    public TableColumn acessBuyDateClmn;
     private int cid;
 
     public Label releaseDate;
@@ -93,7 +102,7 @@ public class customerController {
         ScreenSwitcher.goToScreen(new FXMLLoader(getClass().getResource("signInScreen.fxml")),(Stage)signOut.getScene().getWindow());
     }
 
-    public void setCid(int cid) {
+    public void setCid(int cid) throws SQLException, ClassNotFoundException {
         this.cid = cid;
     }
 
@@ -410,5 +419,49 @@ public class customerController {
         databaseAPI.write("Insert Into reserveOthers (cid,otherId,reserveDate,isCompleted) Values " + DatabaseAPI.convertToSqlFormat(reserveData));
 
         PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Reserving Process Completed Successfully",0,30),(Stage)phonePane.getScene().getWindow());
+    }
+
+    private ObservableList<phonePurchase> setPhonePurchase() throws SQLException, ClassNotFoundException {
+        ObservableList<phonePurchase> phonePurchase = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT pid,yid FROM buyphone WHERE cid = " + cid);
+        while (resultSet.next()){
+            ResultSet phoneName = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + resultSet.getInt(1));
+            phoneName.next();
+            ResultSet dayOfPayment = databaseAPI.read("SELECT dateOfPayment FROM payment WHERE yid = " + resultSet.getInt(2));
+            dayOfPayment.next();
+            phonePurchase.add(new phonePurchase(phoneName.getString(1) + " " + phoneName.getString(2),dayOfPayment.getString(1)));
+        }
+
+        return phonePurchase;
+    }
+
+    private ObservableList<accessoryPurchase> setAcessPurchase() throws SQLException, ClassNotFoundException {
+        ObservableList<accessoryPurchase> acessPurchase = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT otherId,yid FROM buyothers WHERE cid = " + cid);
+        while (resultSet.next()){
+            ResultSet acessName = databaseAPI.read("SELECT name,type FROM others WHERE otherId = " + resultSet.getInt(1));
+            acessName.next();
+            ResultSet dayOfPayment = databaseAPI.read("SELECT dateOfPayment FROM payment WHERE yid = " + resultSet.getInt(2));
+            dayOfPayment.next();
+            acessPurchase.add(new accessoryPurchase(acessName.getString(1) + " | " + acessName.getString(2),dayOfPayment.getString(1)));
+        }
+
+        return acessPurchase;
+    }
+
+    public void selectionChanged(Event event) throws SQLException, ClassNotFoundException {
+        phoneClmn.setCellValueFactory(new PropertyValueFactory("phone"));
+        phoneBuyDateClmn.setCellValueFactory(new PropertyValueFactory("phoneBuyDate"));
+        phonePurchase.setItems(setPhonePurchase());
+
+        acessNameClmn.setCellValueFactory(new PropertyValueFactory("acsName"));
+        acessBuyDateClmn.setCellValueFactory(new PropertyValueFactory("acsBuyDate"));
+        acsPurchase.setItems(setAcessPurchase());
     }
 }
