@@ -247,6 +247,7 @@ public class customerController {
         buyTableData.add(String.valueOf(pid));
         buyTableData.add(String.valueOf(yid));
         //TODO : check these inputs below
+        //TODO : when press view
 //        buyTableData.add("1.4");
 //        buyTableData.add("Dollar");
 

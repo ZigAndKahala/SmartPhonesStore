@@ -23,6 +23,14 @@ import java.util.List;
 public class employeeController {
     public TextField phoneLink;
     public TextField accessoryLink;
+    public TextField wholsalePrice1;
+    public TextField retialPrice1;
+    public TextField addedQuantity;
+    public RadioButton accessorisRadioButton1;
+    public RadioButton phoneRadioButton1;
+    public ChoiceBox producrIs1;
+    public ToggleGroup product1;
+    public ToggleGroup product2;
     private int eid;
 
     public Button signOutButton;
@@ -356,5 +364,14 @@ public class employeeController {
         }
         isImageLinkValid = true;
         return image;
+    }
+
+    public void addProductPhone1(ActionEvent actionEvent) {
+    }
+
+    public void addProductAccessory1(ActionEvent actionEvent) {
+    }
+
+    public void addQuantity(ActionEvent actionEvent) {
     }
 }

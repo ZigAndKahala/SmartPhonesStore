@@ -281,6 +281,56 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="Add Quantity">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="175.0" layoutY="172.0" text="Select Product" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="producrIs1" layoutX="431.0" layoutY="173.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="100.0" />
+                        <RadioButton fx:id="phoneRadioButton1" layoutX="87.0" layoutY="80.0" mnemonicParsing="false" onAction="#addProductPhone1" text="Phone" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="product1" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="accessorisRadioButton1" layoutX="290.0" layoutY="79.0" mnemonicParsing="false" onAction="#addProductAccessory1" text="Accessories" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="30.0">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="product2" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </RadioButton>
+                        <TextField fx:id="addedQuantity" layoutX="39.0" layoutY="170.0" promptText="Added Quantity" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="170.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="482.0" layoutY="370.0" mnemonicParsing="false" onAction="#addQuantity" text="Add Quantity" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="retialPrice1" layoutX="171.0" layoutY="340.0" promptText="Retail Price" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="270.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="wholsalePrice1" layoutX="283.0" layoutY="428.0" promptText="Wholsale Price" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="370.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Button fx:id="signOutButton" mnemonicParsing="false" onAction="#signOut" text="Sign Out" textFill="RED" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
