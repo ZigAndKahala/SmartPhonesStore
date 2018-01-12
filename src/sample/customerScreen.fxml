@@ -150,38 +150,48 @@
                                         </font>
                                     </Button>
                                     <ImageView fx:id="accessoryImage" fitHeight="424.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TextField fx:id="acsName" layoutX="516.0" layoutY="10.0" prefHeight="20.0" prefWidth="348.0" promptText="Name" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="acsName" editable="false" layoutX="516.0" layoutY="10.0" prefHeight="20.0" prefWidth="348.0" promptText="Name" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="0.0">
                                         <font>
                                             <Font size="20.0" />
                                         </font>
                                     </TextField>
-                                    <TextField fx:id="acsType" layoutX="516.0" layoutY="110.0" prefHeight="20.0" prefWidth="348.0" promptText="Type" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="50.0">
+                                    <TextField fx:id="acsType" editable="false" layoutX="516.0" layoutY="110.0" prefHeight="20.0" prefWidth="348.0" promptText="Type" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="50.0">
                                         <font>
                                             <Font size="20.0" />
                                         </font>
                                     </TextField>
-                                    <TextField fx:id="acsPrice" layoutX="347.0" layoutY="373.0" prefHeight="20.0" prefWidth="300.0" promptText="Price" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="450.0">
+                                    <TextField fx:id="acsPrice" editable="false" layoutX="347.0" layoutY="373.0" prefHeight="20.0" prefWidth="300.0" promptText="Price" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="450.0">
                                         <font>
                                             <Font size="25.0" />
                                         </font>
                                     </TextField>
-                                    <TextField fx:id="acsQuantity" layoutX="426.0" layoutY="447.0" prefHeight="20.0" prefWidth="300.0" promptText="Quantity" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="450.0">
+                                    <TextField fx:id="acsQuantity" editable="false" layoutX="426.0" layoutY="447.0" prefHeight="20.0" prefWidth="300.0" promptText="Quantity" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="450.0">
                                         <font>
                                             <Font size="25.0" />
                                         </font>
                                     </TextField>
-                                    <TextField layoutX="386.0" layoutY="452.0" prefHeight="104.0" prefWidth="348.0" promptText="Description" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="100.0">
+                                    <TextField fx:id="acsDescription" editable="false" layoutX="386.0" layoutY="452.0" prefHeight="104.0" prefWidth="348.0" promptText="Description" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="150.0">
                                         <font>
                                             <Font size="15.0" />
                                         </font>
                                     </TextField>
-                              <TextField fx:id="acsPromotion" editable="false" prefHeight="65.0" prefWidth="649.0" promptText="Promotion" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0">
+                              <TextField fx:id="acsPromotion" editable="false" prefHeight="65.0" prefWidth="649.0" promptText="Promotion" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0">
                                  <font>
                                     <Font name="System Bold" size="30.0" />
                                  </font>
                               </TextField>
+                              <TextField fx:id="acsStatus" editable="false" layoutX="526.0" layoutY="120.0" prefHeight="20.0" prefWidth="348.0" promptText="Status" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="100.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
                            </children>
                         </AnchorPane>
+                        <Button layoutX="742.0" layoutY="74.0" mnemonicParsing="false" onAction="#viewSelectedAccessory" text="View">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
                           </children>
                       </Pane>
                   </content>

@@ -7,8 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class customerController {
     public AnchorPane accessoryPane;
@@ -28,6 +27,8 @@ public class customerController {
     public TextField acsPrice;
     public TextField acsQuantity;
     public TextField acsPromotion;
+    public TextField acsDescription;
+    public TextField acsStatus;
     private int cid;
 
     public Label releaseDate;
@@ -54,11 +55,15 @@ public class customerController {
     private List<Integer> phonesIdIndexes = new ArrayList<>();
     private List<Integer> accessoryIdIndexes = new ArrayList<>();
     private double phonePrice;
-    private double promoValue;
+    private double PpromoValue;
+    private double ApromoValue;
     private int pid;
+    private int otherId;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         phonePane.setVisible(false);
+        accessoryPane.setVisible(false);
+
         //Adding phones List
         List<String> phonesList = new ArrayList<>();
 
@@ -76,9 +81,9 @@ public class customerController {
         List<String> accessoryList = new ArrayList<>();
 
         ResultSet listOfAvailableAccessories = databaseAPI.read("SELECT otherId,name,type FROM others WHERE quantity != 0;");
-        while (listOfAvailablePhones.next()){
+        while (listOfAvailableAccessories.next()){
             accessoryIdIndexes.add(listOfAvailableAccessories.getInt(1));
-            accessoryList.add(listOfAvailablePhones.getString(2) + " " + listOfAvailablePhones.getString(3));
+            accessoryList.add(listOfAvailableAccessories.getString(2) + " | " + listOfAvailableAccessories.getString(3));
         }
 
         chooseAccessory.getItems().addAll(accessoryList);
@@ -102,20 +107,11 @@ public class customerController {
         ResultSet phoneData = databaseAPI.read("SELECT proId, description, wholesalePrice," +
                 " status, quantity, warrantyPeriod, releasDate, weightAndThikness, OSVersion," +
                 " storageAndSDSlot, screenSizeAndResolution, CameraPhotoAndVideo, RAMAndChipset, batteryCapacityAndTechnology," +
-                " imageLink,pid FROM phone WHERE pid = " + phonesIdIndexes.get(choosePhone.getSelectionModel().getSelectedIndex()));
+                " imageLink FROM phone WHERE pid = " + phonesIdIndexes.get(choosePhone.getSelectionModel().getSelectedIndex()));
 
         phoneData.next();
         int promId = phoneData.getInt(1);
-        ResultSet promotionValue = databaseAPI.read("SELECT percentage,startDate,endDate FROM promotions WHERE proId = " + promId);
-        if(promotionValue.next()) {
-            promoValue = promotionValue.getDouble(1);
-            promotion.setText("Promotion : " + promoValue + "% | End Date : " + promotionValue.getString(3));
-            promotion.setVisible(true);
-            promotion.setStyle("-fx-text-fill: green");
-        }
-        else {
-            promotion.setVisible(false);
-        }
+        setPromotion(promId,true,promotion);
 
         description.setText(phoneData.getString(2));
         phonePrice = phoneData.getDouble(3);
@@ -133,9 +129,54 @@ public class customerController {
         RAMAndChipSet.setText(phoneData.getString(13));
         BatteryCapacity.setText(phoneData.getString(14));
         phoneImage.setImage(new Image(phoneData.getString(15)));
-        pid = phoneData.getInt(16);
+        pid = phonesIdIndexes.get(choosePhone.getSelectionModel().getSelectedIndex());
 
         phonePane.setVisible(true);
+    }
+
+    public void viewSelectedAccessory(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if (chooseAccessory.getSelectionModel().getSelectedIndex() == -1) {
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Please Choose an Accessory First", 1, 40), (Stage) choosePhone.getScene().getWindow());
+            return;
+        }
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        ResultSet accessoryData = databaseAPI.read("SELECT proId, name, description, wholesalePrice, quantity, type, status, imageLink FROM others WHERE otherId = " +
+                accessoryIdIndexes.get(chooseAccessory.getSelectionModel().getSelectedIndex()));
+
+        accessoryData.next();
+        int promId = accessoryData.getInt(1);
+        setPromotion(promId,false,acsPromotion);
+
+        acsName.setText(accessoryData.getString(2));
+        acsDescription.setText(accessoryData.getString(3));
+        acsPrice.setText("Price : " + String.valueOf(accessoryData.getDouble(4)) + "$");
+        acsQuantity.setText("Quantity : " + String.valueOf(accessoryData.getInt(5)));
+        acsType.setText(accessoryData.getString(6));
+        acsStatus.setText(accessoryData.getString(7));
+        accessoryImage.setImage(new Image(accessoryData.getString(8)));
+        otherId = accessoryIdIndexes.get(chooseAccessory.getSelectionModel().getSelectedIndex());
+
+        accessoryPane.setVisible(true);
+    }
+
+    private void setPromotion(int promotionId,Boolean isPhone, TextField textField) throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        ResultSet promotionValue = databaseAPI.read("SELECT percentage,startDate,endDate FROM promotions WHERE proId = " + promotionId);
+        if(promotionValue.next()) {
+            double promoValue = promotionValue.getDouble(1);
+            if (isPhone)
+                PpromoValue = promoValue;
+            else
+                ApromoValue = promoValue;
+
+            textField.setText("Promotion : " + promoValue + "% | End Date : " + promotionValue.getString(3));
+            textField.setVisible(true);
+            textField.setStyle("-fx-text-fill: green");
+        }
+        else {
+            textField.setVisible(false);
+        }
     }
 
     public void buy(ActionEvent actionEvent){
@@ -167,20 +208,21 @@ public class customerController {
             return;
         }
 
+        //TODO : delete -1 from quantity
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
         List<String> paymentData = new ArrayList<>();
 
         if(promotion.isVisible())
-            paymentData.add(String.valueOf(phonePrice*(promoValue/100)));
+            paymentData.add(String.valueOf(phonePrice*(PpromoValue/100)));
         else
             paymentData.add(String.valueOf(phonePrice));
 
         paymentData.add(String.valueOf(dateFormat.format(date)));
 
         if(promotion.isVisible())
-            paymentData.add(String.valueOf(phonePrice*(promoValue/100)));
+            paymentData.add(String.valueOf(phonePrice*(PpromoValue/100)));
         else
             paymentData.add(String.valueOf(phonePrice));
 
@@ -227,8 +269,13 @@ public class customerController {
     private void reserveDevice() throws SQLException, ClassNotFoundException {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
-        ResultSet resultSet = databaseAPI.read("Select cid from reservePhone where cid = " + cid + " && pid = " + pid);
+        ResultSet resultSet1 = databaseAPI.read("Select cid From buyPhone Where cid = " + cid + " && pid = " + pid);
+        if (resultSet1.next()){
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Why to reserve you own phone *_^ ?",1,30),(Stage)phonePane.getScene().getWindow());
+            return;
+        }
 
+        ResultSet resultSet = databaseAPI.read("Select cid from reservePhone where cid = " + cid + " && pid = " + pid);
         if (resultSet.next()){
             PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Reserved this Device",1,30),(Stage)phonePane.getScene().getWindow());
             return;
@@ -249,10 +296,119 @@ public class customerController {
     }
 
     public void buyAccessory(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Buy Confirmation");
+        alert.setContentText("Are you sure you want to Buy this Accessory?");
+        ButtonType okButton = new ButtonType("Buy", ButtonBar.ButtonData.YES);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButton, cancelButton);
+        alert.showAndWait().ifPresent(type -> {
+            if (type.getText().equals("Buy")) {
+                try {
+                    buyAccess();
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } else if (type.getText().equals("Cancel")) {
+                PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Canceled Buying",1,30),(Stage)phonePane.getScene().getWindow());
+            }
+        });
+    }
 
+    private void buyAccess() throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("Select cid From buyOthers Where cid = " + cid + " && otherId = " + otherId);
+        if (resultSet.next()){
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Bought this Device",1,30),(Stage)phonePane.getScene().getWindow());
+            return;
+        }
+
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        List<String> paymentData = new ArrayList<>();
+
+        if(acsPromotion.isVisible())
+            paymentData.add(String.valueOf(Double.parseDouble(acsPrice.getText())*(ApromoValue/100)));
+        else
+            paymentData.add(acsPrice.getText());
+
+        paymentData.add(String.valueOf(dateFormat.format(date)));
+
+        if(acsPromotion.isVisible())
+            paymentData.add(String.valueOf(Double.parseDouble(acsPrice.getText())*(ApromoValue/100)));
+        else
+            paymentData.add(acsPrice.getText());
+
+        paymentData.add(String.valueOf(dateFormat.format(date)));
+
+        databaseAPI.write("Insert Into payment (paidAmount,dateOfPayment,actualPaidAmount,dateOfActualPayment) Values " + DatabaseAPI.convertToSqlFormat(paymentData));
+
+        ResultSet paymentId = databaseAPI.read("Select max(yid) From payment");
+        paymentId.next();
+        int yid = paymentId.getInt(1);
+
+        List<String> buyOthersInput = new ArrayList<>();
+        buyOthersInput.add(String.valueOf(cid));
+        buyOthersInput.add(String.valueOf(otherId));
+        buyOthersInput.add(String.valueOf(yid));
+
+        databaseAPI.write("Insert Into buyOthers (cid,otherId,yid) values " + DatabaseAPI.convertToSqlFormat(buyOthersInput));
+
+        PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Buying Process Completed Successfully",0,30),(Stage)phonePane.getScene().getWindow());
     }
 
     public void reserveAccessory(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Reserve Confirmation");
+        alert.setContentText("Are you sure you want to reserve this Accessory?");
+        ButtonType okButton = new ButtonType("Reserve", ButtonBar.ButtonData.YES);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButton, cancelButton);
+        alert.showAndWait().ifPresent(type -> {
+            if (type.getText().equals("Reserve")) {
+                try {
+                    reserveAccess();
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } else if (type.getText().equals("Cancel")) {
+                PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Canceled Reserving",1,30),(Stage)phonePane.getScene().getWindow());
+            }
+        });
+    }
 
+    private void reserveAccess() throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet1 = databaseAPI.read("Select cid From buyOthers Where cid = " + cid + " && otherId = " + otherId);
+        if (resultSet1.next()){
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Why to reserve you own Accessory *_^ ?",1,30),(Stage)phonePane.getScene().getWindow());
+            return;
+        }
+
+        ResultSet resultSet = databaseAPI.read("Select cid from reserveOthers where cid = " + cid + " && otherId = " + otherId);
+
+        if (resultSet.next()){
+            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Reserved this Accessory",1,30),(Stage)phonePane.getScene().getWindow());
+            return;
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        List<String> reserveData = new ArrayList<>();
+        reserveData.add(String.valueOf(cid));
+        reserveData.add(String.valueOf(otherId));
+        reserveData.add(String.valueOf(dateFormat.format(date)));
+        //ToDo : add successful in employee screen
+        //ToDo : edit description length
+        reserveData.add("1");
+
+        databaseAPI.write("Insert Into reserveOthers (cid,otherId,reserveDate,isCompleted) Values " + DatabaseAPI.convertToSqlFormat(reserveData));
+
+        PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Reserving Process Completed Successfully",0,30),(Stage)phonePane.getScene().getWindow());
     }
 }
