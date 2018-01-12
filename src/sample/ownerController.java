@@ -26,6 +26,7 @@ public class ownerController {
     public ChoiceBox city;
     public TextField street;
     public AnchorPane rootPane;
+    public ChoiceBox type;
     private int oid;
 
     public TextField name;
@@ -45,6 +46,8 @@ public class ownerController {
     private Boolean isPhoneNumberCorrect = true;
     private Boolean isEmailNumberCorrect = true;
 
+
+    ObservableList<String> mainTypeList = FXCollections.observableArrayList("Casher","Cleaner","seller");
 
     public void initialize() throws SQLException, ClassNotFoundException {
         city.getItems().addAll(FXCollections.observableArrayList(
@@ -67,6 +70,7 @@ public class ownerController {
         ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(employeesName);
         employees.setItems(mainTypeListaccessories);
 
+        type.setItems(mainTypeList);
         //TODO : resize the two tables to the user Main.screenWidth & Main.screenHeight
     }
 
@@ -106,11 +110,11 @@ public class ownerController {
         sId.next();
         int sid = sId.getInt(1);
         String nameEmpis = (String) employees.getValue();
-        ResultSet eId = databaseAPI.read("SELECT eid FROM employee where name= \"" + nameEmpis + "\"");
+        ResultSet eId = databaseAPI.read("SELECT eid FROM employee where name= \" " + nameEmpis + "\"");
          eId.next();
          int eid = eId.getInt(1);
-        databaseAPI.write("UPDATE salary SET eid = " + eid + " WHERE sid = \"" + sid + "\"");
-        databaseAPI.write("UPDATE salary SET oid = " + oid + " WHERE sid = \"" + sid + "\"");
+        databaseAPI.write("UPDATE salary SET eid = " + eid + " WHERE sid = " + sid );
+        databaseAPI.write("UPDATE salary SET oid = " + oid + " WHERE sid = " + sid );
 
 
 
@@ -139,8 +143,11 @@ public class ownerController {
         employeeParameters.add(name.getText());
         employeeParameters.add(email.getText());
         employeeParameters.add(password.getText());
-        employeeParameters.add(number.getText());
         employeeParameters.add(date);
+        employeeParameters.add(number.getText());
+        String ttype = (String) type.getValue();
+        employeeParameters.add(ttype);
+
 
         ResultSet cityid = databaseAPI.read("Select cityid from city where name = " + "\"" + city.getSelectionModel().getSelectedItem().toString() + "\"");
         cityid.next();
@@ -150,7 +157,7 @@ public class ownerController {
         addressParameters.add(String.valueOf(cityId));
         addressParameters.add(street.getText());
 
-        databaseAPI.write("INSERT INTO employee " + DatabaseAPI.generateSqlCommand("name,email,password,mobileNumber,dateOfBirth",employeeParameters));
+        databaseAPI.write("INSERT INTO employee " + DatabaseAPI.generateSqlCommand("name,email,password,mobileNumber,dateOfBirth,type",employeeParameters));
         databaseAPI.write("INSERT INTO address " + DatabaseAPI.generateSqlCommand("cityId,streetName",addressParameters));
         ResultSet maxEid = databaseAPI.read("SELECT max(eid) from employee;");
         maxEid.next();

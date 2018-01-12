@@ -102,33 +102,97 @@ public class employeeController {
             return;
         }
 
-        List<String> parameters = new ArrayList<>();
-        parameters.add(phoneName.getText());
-        parameters.add(phoneVersion.getText());
-        parameters.add(description.getText());
-        parameters.add(wholesalePrice.getText());
-        parameters.add(status.getText());
-        parameters.add(retailPrice.getText());
-        parameters.add(Quantity.getText());
-        parameters.add(warrantyPeriod.getText());
-        parameters.add(reldate);
-        parameters.add(weightThikness.getText());
-        parameters.add(OsVersion.getText());
-        parameters.add(storageSdSlot.getText());
-        parameters.add(screenSizeAndResolution.getText());
-        parameters.add(cameraPhotoResolution.getText());
-        parameters.add(RAMAndChipset.getText());
-        parameters.add(BatteryCapacity.getText());
-        parameters.add(phoneLink.getText());
-
-
+        String phnam = phoneName.getText();
+        String phvar = phoneVersion.getText();
         DatabaseAPI databaseAPI = new DatabaseAPI();
-        databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,description,wholesalePrice,status,retailPrice,Quantity,warrantyPeriod,releasDate,weightAndThikness,OSVersion,storageAndSDSlot,screenSizeAndResolution,CameraPhotoAndVideo,RAMAndChipset,batteryCapacityAndTechnology,imageLink",parameters));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setContentText("Done ^_^");
-        alert.showAndWait();
+        ResultSet resultSet00 = databaseAPI.read("select pid from phone where name = \"" + phnam +  "\" && phoneVersion = \"" + phvar + "\"" );
+        if(resultSet00.next())
+        {
 
+            int pid = resultSet00.getInt(1);
+            int q = Integer.parseInt(Quantity.getText());
+            ResultSet qbefore= databaseAPI.read("select quantity from phone where pid =" + pid );
+            qbefore.next();
+            int q1 = qbefore.getInt(1);
+            int q2=q+q1;
+            databaseAPI.write("UPDATE phone SET quantity = " + q2 + " WHERE pid = " + pid );
+
+
+            if(!description.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET description = \"" + description.getText() +"\" WHERE pid = " + pid);
+            }
+            if(!wholesalePrice.getText().equals("")){
+                int wp = Integer.parseInt(wholesalePrice.getText());
+                databaseAPI.write("UPDATE phone SET wholesalePrice = " + wp + " WHERE pid = " + pid );
+            }
+            if(!status.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET status = \"" + status.getText() + "\" WHERE pid = " + pid );
+            }
+            int retial = Integer.parseInt(retailPrice.getText());
+            if(!retailPrice.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET retailPrice = " + retial + " WHERE pid = " + pid);
+            }
+            int wp = Integer.parseInt(warrantyPeriod.getText());
+            if(!warrantyPeriod.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET warrantyPeriod = " + wp + " WHERE pid = " + pid );
+            }
+            if(!reldate.equals("")){
+                databaseAPI.write("UPDATE phone SET releasDate = \"" + reldate + "\" WHERE pid =" + pid);
+            }
+            if(!weightThikness.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET weightAndThikness = \"" + weightThikness.getText() +"\"  WHERE pid = " + pid);
+            }
+            if(!OsVersion.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET OsVersion = \"" + OsVersion.getText() +"\"  WHERE pid = "+ pid);
+            }
+            if(!storageSdSlot.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET storageAndSDSlot = \"" + storageSdSlot.getText() + "\" WHERE pid = " + pid);
+            }
+            if(!screenSizeAndResolution.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET screenSizeAndResolution = \"" + screenSizeAndResolution.getText() +"\"  WHERE pid = " + pid);
+            }
+            if(!cameraPhotoResolution.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET CameraPhotoAndVideo = \"" + cameraPhotoResolution.getText() +"\"  WHERE pid = " + pid );
+            }
+            if(!RAMAndChipset.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET RAMAndChipset = \"" + RAMAndChipset.getText() + "\" WHERE pid = " + pid);
+            }
+            if(!BatteryCapacity.getText().equals("")){
+                databaseAPI.write("UPDATE phone SET batteryCapacityAndTechnology = \"" + BatteryCapacity.getText() + "\" WHERE pid = " + pid);
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setContentText("Your is already exist so we just UPDATE data for this type of phone");
+            alert.showAndWait();
+        }
+        else {
+            List<String> parameters = new ArrayList<>();
+            parameters.add(phoneName.getText());
+            parameters.add(phoneVersion.getText());
+            parameters.add(description.getText());
+            parameters.add(wholesalePrice.getText());
+            parameters.add(status.getText());
+            parameters.add(retailPrice.getText());
+            parameters.add(Quantity.getText());
+            parameters.add(warrantyPeriod.getText());
+            parameters.add(reldate);
+            parameters.add(weightThikness.getText());
+            parameters.add(OsVersion.getText());
+            parameters.add(storageSdSlot.getText());
+            parameters.add(screenSizeAndResolution.getText());
+            parameters.add(cameraPhotoResolution.getText());
+            parameters.add(RAMAndChipset.getText());
+            parameters.add(BatteryCapacity.getText());
+            parameters.add(phoneLink.getText());
+
+
+            databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,description,wholesalePrice,status,retailPrice,Quantity,warrantyPeriod,releasDate,weightAndThikness,OSVersion,storageAndSDSlot,screenSizeAndResolution,CameraPhotoAndVideo,RAMAndChipset,batteryCapacityAndTechnology,imageLink", parameters));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setContentText("Done ^_^");
+            alert.showAndWait();
+        }
 
     }
 

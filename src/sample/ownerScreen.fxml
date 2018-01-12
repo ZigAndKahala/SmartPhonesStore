@@ -81,22 +81,28 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="152.0" layoutY="728.0" text="Choose City" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="700.0">
+                        <Label layoutX="152.0" layoutY="728.0" text="Working Type" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="700.0">
                            <font>
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="city" layoutX="542.0" layoutY="720.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="700.0" />
-                        <Label layoutX="895.0" layoutY="717.0" text="Street" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="700.0">
+                        <ChoiceBox fx:id="type" layoutX="542.0" layoutY="720.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="700.0" />
+                        <Label layoutX="895.0" layoutY="717.0" text="Street" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="800.0">
                            <font>
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="street" layoutX="817.0" layoutY="714.0" onKeyReleased="#editingNumber" prefHeight="56.0" prefWidth="549.0" promptText="Optional" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="700.0">
+                        <TextField fx:id="street" layoutX="817.0" layoutY="714.0" onKeyReleased="#editingNumber" prefHeight="56.0" prefWidth="549.0" promptText="Optional" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="800.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </TextField>
+                        <Label layoutX="162.0" layoutY="738.0" text="Choose City" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="800.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="city" layoutX="552.0" layoutY="730.0" prefHeight="40.0" prefWidth="306.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="800.0" />
                      </children>
                   </AnchorPane>
                </content>
