@@ -23,13 +23,13 @@
                <content>
                   <AnchorPane fx:id="addPhone">
                      <children>
-                        <ChoiceBox fx:id="choosePhone" layoutX="357.0" layoutY="79.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="341.0" AnchorPane.topAnchor="79.0" />
+                        <ChoiceBox fx:id="choosePhone" layoutX="357.0" layoutY="79.0" onMouseClicked="#showPhones" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="341.0" AnchorPane.topAnchor="79.0" />
                         <Label layoutX="75.0" layoutY="67.0" text="Choose Phone" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="67.0">
                            <font>
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <Button layoutX="660.0" layoutY="79.0" mnemonicParsing="false" onAction="#viewSelectedPhone" text="View">
+                        <Button fx:id="viewPhoneButton" layoutX="660.0" layoutY="79.0" mnemonicParsing="false" onAction="#viewSelectedPhone" text="View">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -136,7 +136,7 @@
                                       <Font size="41.0" />
                                   </font>
                               </Label>
-                              <ComboBox fx:id="chooseAccessory" layoutX="420.0" layoutY="79.0" prefHeight="38.0" prefWidth="300.0" />
+                              <ComboBox fx:id="chooseAccessory" layoutX="420.0" layoutY="79.0" onMouseClicked="#showAccessories" prefHeight="38.0" prefWidth="300.0" />
                         <AnchorPane fx:id="accessoryPane" layoutX="64.0" layoutY="198.0">
                            <children>
                                     <Button layoutX="1056.0" layoutY="715.0" mnemonicParsing="false" onAction="#buyAccessory" text="Buy" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="600.0">
@@ -187,7 +187,7 @@
                               </TextField>
                            </children>
                         </AnchorPane>
-                        <Button layoutX="742.0" layoutY="74.0" mnemonicParsing="false" onAction="#viewSelectedAccessory" text="View">
+                        <Button fx:id="viewAcessButton" layoutX="742.0" layoutY="74.0" mnemonicParsing="false" onAction="#viewSelectedAccessory" text="View">
                            <font>
                               <Font size="20.0" />
                            </font>

@@ -118,7 +118,7 @@ public class employeeController {
         String phnam = phoneName.getText();
         String phvar = phoneVersion.getText();
         DatabaseAPI databaseAPI = new DatabaseAPI();
-        ResultSet resultSet00 = databaseAPI.read("select pid from phone where name = \"" + phnam +  "\" && phoneVersion = \"" + phvar + "\"" );
+        ResultSet resultSet00 = databaseAPI.read("select pid from phone where name = \"" + phnam +  "\" && phoneVersion = \"" + phvar + "\"" + " && phoneImage IS NOT NULL");
         if(resultSet00.next())
         {
 

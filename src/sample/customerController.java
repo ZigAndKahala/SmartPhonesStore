@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -38,6 +39,8 @@ public class customerController {
     public TableColumn phoneBuyDateClmn;
     public TableColumn acessNameClmn;
     public TableColumn acessBuyDateClmn;
+    public Button viewPhoneButton;
+    public Button viewAcessButton;
     private int cid;
 
     public Label releaseDate;
@@ -68,33 +71,44 @@ public class customerController {
     private double ApromoValue;
     private int pid;
     private int otherId;
+    private double accessoryPrice;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         phonePane.setVisible(false);
         accessoryPane.setVisible(false);
 
+    }
+
+    private void showAvailablePhones() throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        phonesIdIndexes.clear();
+
         //Adding phones List
         List<String> phonesList = new ArrayList<>();
 
-        DatabaseAPI databaseAPI = new DatabaseAPI();
-        ResultSet listOfAvailablePhones = databaseAPI.read("SELECT pid,name,phoneVersion FROM phone WHERE quantity != 0;");
+        ResultSet listOfAvailablePhones = databaseAPI.read("SELECT pid,name,phoneVersion FROM phone WHERE quantity != 0 && imageLink IS NOT NULL;");
         while (listOfAvailablePhones.next()) {
             phonesIdIndexes.add(listOfAvailablePhones.getInt(1));
             phonesList.add(listOfAvailablePhones.getString(2) + " " + listOfAvailablePhones.getString(3));
         }
 
-
+        choosePhone.getItems().clear();
         choosePhone.getItems().addAll(phonesList);
+    }
 
+    private void showAvailableAccessories() throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        accessoryIdIndexes.clear();
         //Adding accessory List
         List<String> accessoryList = new ArrayList<>();
 
-        ResultSet listOfAvailableAccessories = databaseAPI.read("SELECT otherId,name,type FROM others WHERE quantity != 0;");
+        ResultSet listOfAvailableAccessories = databaseAPI.read("SELECT otherId,name,type FROM others WHERE quantity != 0  && imageLink IS NOT NULL;");
         while (listOfAvailableAccessories.next()){
             accessoryIdIndexes.add(listOfAvailableAccessories.getInt(1));
             accessoryList.add(listOfAvailableAccessories.getString(2) + " | " + listOfAvailableAccessories.getString(3));
         }
 
+        chooseAccessory.getItems().clear();
         chooseAccessory.getItems().addAll(accessoryList);
     }
 
@@ -116,7 +130,7 @@ public class customerController {
         ResultSet phoneData = databaseAPI.read("SELECT proId, description, wholesalePrice," +
                 " status, quantity, warrantyPeriod, releasDate, weightAndThikness, OSVersion," +
                 " storageAndSDSlot, screenSizeAndResolution, CameraPhotoAndVideo, RAMAndChipset, batteryCapacityAndTechnology," +
-                " imageLink FROM phone WHERE pid = " + phonesIdIndexes.get(choosePhone.getSelectionModel().getSelectedIndex()));
+                " imageLink,name,phoneVersion FROM phone WHERE pid = " + phonesIdIndexes.get(choosePhone.getSelectionModel().getSelectedIndex()));
 
         phoneData.next();
         int promId = phoneData.getInt(1);
@@ -126,7 +140,11 @@ public class customerController {
         phonePrice = phoneData.getDouble(3);
         wholesalePrice.setText("Price : " + phonePrice);
         status.setText("Status : " + phoneData.getString(4));
-        quantity.setText("Quantity X " + phoneData.getInt(5));
+        int qualities = 0;
+        ResultSet allPhones = databaseAPI.read("SELECT quantity FROM phone WHERE name = \"" + phoneData.getString(16) + "\" && phoneVersion = \"" + phoneData.getString(17) + "\";");
+        while(allPhones.next())
+            qualities += allPhones.getInt(1);
+        quantity.setText("Quantity X " + qualities);
         warrantyPeriod.setText("Warranty Period : " + phoneData.getString(6));
         String releaseDate = phoneData.getString(7);
         this.releaseDate.setText("Released " + releaseDate.split("-")[0] + " - " + releaseDate.split("-")[1]);
@@ -159,8 +177,13 @@ public class customerController {
 
         acsName.setText(accessoryData.getString(2));
         acsDescription.setText(accessoryData.getString(3));
-        acsPrice.setText("Price : " + String.valueOf(accessoryData.getDouble(4)) + "$");
-        acsQuantity.setText("Quantity : " + String.valueOf(accessoryData.getInt(5)));
+        accessoryPrice = accessoryData.getDouble(4);
+        acsPrice.setText("Price : " + String.valueOf(accessoryPrice) + "$");
+        int qualities = 0;
+        ResultSet allPhones = databaseAPI.read("SELECT quantity FROM others WHERE name = \"" + accessoryData.getString(2) + "\" && type = \"" + accessoryData.getString(6) + "\";");
+        while(allPhones.next())
+            qualities += allPhones.getInt(1);
+        acsQuantity.setText("Quantity X " + qualities);
         acsType.setText(accessoryData.getString(6));
         acsStatus.setText(accessoryData.getString(7));
         accessoryImage.setImage(new Image(accessoryData.getString(8)));
@@ -211,13 +234,12 @@ public class customerController {
     private void buyDevice() throws SQLException, ClassNotFoundException {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
-        ResultSet resultSet = databaseAPI.read("Select cid From buyPhone Where cid = " + cid + " && pid = " + pid);
-        if (resultSet.next()){
-            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Bought this Device",1,30),(Stage)phonePane.getScene().getWindow());
-            return;
-        }
+//        ResultSet resultSet = databaseAPI.read("Select cid From buyPhone Where cid = " + cid + " && pid = " + pid);
+//        if (resultSet.next()){
+//            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Bought this Device",1,30),(Stage)phonePane.getScene().getWindow());
+//            return;
+//        }
 
-        //TODO : delete -1 from quantity
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
@@ -228,14 +250,14 @@ public class customerController {
         else
             paymentData.add(String.valueOf(phonePrice));
 
-        paymentData.add(String.valueOf(dateFormat.format(date)));
+        paymentData.add(dateFormat.format(date));
 
         if(promotion.isVisible())
             paymentData.add(String.valueOf(phonePrice*(PpromoValue/100)));
         else
             paymentData.add(String.valueOf(phonePrice));
 
-        paymentData.add(String.valueOf(dateFormat.format(date)));
+        paymentData.add(dateFormat.format(date));
 
         databaseAPI.write("Insert Into payment (paidAmount,dateOfPayment,actualPaidAmount,dateOfActualPayment) Values " + DatabaseAPI.convertToSqlFormat(paymentData));
 
@@ -247,13 +269,22 @@ public class customerController {
         buyTableData.add(String.valueOf(pid));
         buyTableData.add(String.valueOf(yid));
         //TODO : check these inputs below
-        //TODO : when press view
 //        buyTableData.add("1.4");
 //        buyTableData.add("Dollar");
 
         databaseAPI.write("Insert Into buyPhone (cid,pid,yid) values " + DatabaseAPI.convertToSqlFormat(buyTableData));
 
+        ResultSet phoneData = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + pid);
+        phoneData.next();
+
+        ResultSet phoneWithMaxQuantity = databaseAPI.read("Select pid,max(quantity) from phone WHERE name = \"" + phoneData.getString(1) + "\" && phoneVersion = \"" + phoneData.getString(2) + "\";");
+        phoneWithMaxQuantity.next();
+
+        databaseAPI.write("UPDATE phone SET quantity = " + (phoneWithMaxQuantity.getInt(2) - 1) + " WHERE pid = " + phoneWithMaxQuantity.getInt(1));
+
         PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Buying Process Completed Successfully",0,30),(Stage)phonePane.getScene().getWindow());
+
+        viewPhoneButton.fire();
     }
 
     public void reserve(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -328,11 +359,11 @@ public class customerController {
     private void buyAccess() throws SQLException, ClassNotFoundException {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
-        ResultSet resultSet = databaseAPI.read("Select cid From buyOthers Where cid = " + cid + " && otherId = " + otherId);
-        if (resultSet.next()){
-            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Bought this Device",1,30),(Stage)phonePane.getScene().getWindow());
-            return;
-        }
+//        ResultSet resultSet = databaseAPI.read("Select cid From buyOthers Where cid = " + cid + " && otherId = " + otherId);
+//        if (resultSet.next()){
+//            PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("You Already Bought this Device",1,30),(Stage)phonePane.getScene().getWindow());
+//            return;
+//        }
 
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -341,14 +372,14 @@ public class customerController {
         List<String> paymentData = new ArrayList<>();
 
         if(acsPromotion.isVisible())
-            paymentData.add(String.valueOf(Double.parseDouble(acsPrice.getText())*(ApromoValue/100)));
+            paymentData.add(String.valueOf(accessoryPrice*(ApromoValue/100)));
         else
             paymentData.add(acsPrice.getText());
 
         paymentData.add(String.valueOf(dateFormat.format(date)));
 
         if(acsPromotion.isVisible())
-            paymentData.add(String.valueOf(Double.parseDouble(acsPrice.getText())*(ApromoValue/100)));
+            paymentData.add(String.valueOf(accessoryPrice*(ApromoValue/100)));
         else
             paymentData.add(acsPrice.getText());
 
@@ -367,7 +398,17 @@ public class customerController {
 
         databaseAPI.write("Insert Into buyOthers (cid,otherId,yid) values " + DatabaseAPI.convertToSqlFormat(buyOthersInput));
 
+        ResultSet accessData = databaseAPI.read("SELECT name,type FROM others WHERE otherId = " + otherId);
+        accessData.next();
+
+        ResultSet accessWithMaxQuantity = databaseAPI.read("Select otherId,max(quantity) from others WHERE name = \"" + accessData.getString(1) + "\" && type = \"" + accessData.getString(2) + "\";");
+        accessWithMaxQuantity.next();
+
+        databaseAPI.write("UPDATE others SET quantity = " + (accessWithMaxQuantity.getInt(2) - 1) + " WHERE otherId = " + accessWithMaxQuantity.getInt(1));
+
         PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Buying Process Completed Successfully",0,30),(Stage)phonePane.getScene().getWindow());
+
+        viewAcessButton.fire();
     }
 
     public void reserveAccessory(ActionEvent actionEvent) {
@@ -464,5 +505,13 @@ public class customerController {
         acessNameClmn.setCellValueFactory(new PropertyValueFactory("acsName"));
         acessBuyDateClmn.setCellValueFactory(new PropertyValueFactory("acsBuyDate"));
         acsPurchase.setItems(setAcessPurchase());
+    }
+
+    public void showAccessories(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
+        showAvailableAccessories();
+    }
+
+    public void showPhones(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
+        showAvailablePhones();
     }
 }
