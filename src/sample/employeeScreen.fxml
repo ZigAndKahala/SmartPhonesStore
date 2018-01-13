@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
+<AnchorPane fx:id="anchor" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.employeeController">
    <children>
       <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <tabs>
@@ -299,10 +299,7 @@
                               <ToggleGroup fx:id="product1" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="accessorisRadioButton1" layoutX="290.0" layoutY="79.0" mnemonicParsing="false" onAction="#addProductAccessory1" text="Accessories" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="30.0">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="product2" />
-                           </toggleGroup>
+                        <RadioButton fx:id="accessorisRadioButton1" layoutX="290.0" layoutY="79.0" mnemonicParsing="false" onAction="#addProductAccessory1" text="Accessories" toggleGroup="$product1" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="30.0">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -331,7 +328,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Delete Phone">
+            <Tab text="Delete Porpduct">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -341,18 +338,15 @@
                            </font>
                         </Label>
                         <ChoiceBox fx:id="producrIs2" layoutX="418.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="100.0" />
-                        <RadioButton fx:id="phoneRadioButton2" layoutX="277.0" layoutY="127.0" mnemonicParsing="false" onAction="#addProductPhone1" text="Phone" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
+                        <RadioButton fx:id="phoneRadioButton2" layoutX="277.0" layoutY="127.0" mnemonicParsing="false" onAction="#addProductPhone2" text="Phone" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="product11" />
+                              <ToggleGroup fx:id="product2" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="accessorisRadioButton2" layoutX="144.0" layoutY="166.0" mnemonicParsing="false" onAction="#addProductAccessory1" text="Accessories" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="30.0">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="product21" />
-                           </toggleGroup>
+                        <RadioButton fx:id="accessorisRadioButton2" layoutX="144.0" layoutY="166.0" mnemonicParsing="false" onAction="#addProductAccessory2" text="Accessories" toggleGroup="$product2" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="30.0">
                            <font>
                               <Font size="30.0" />
                            </font>
