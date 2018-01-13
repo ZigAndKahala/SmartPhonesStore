@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +20,9 @@ public class signInController {
     public Button signIn;
     public TextField userId;
     public AnchorPane rootPane;
+    public TextField forfname;
+    public Label d;
+    public Label ll;
 
     private int userID;
 
@@ -139,5 +143,18 @@ public class signInController {
 
     private void displayIdError(){
         PopupMessage.showPopupMessageCenter(PopupMessage.createPopup("Wrong User Id Or Password",1,40),(Stage)password.getScene().getWindow());
+    }
+
+    public void remember(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet customernam = databaseAPI.read("SELECT cid from customer where name= \"" + forfname.getText() +"\"");
+        customernam.next();
+        int gj = customernam.getInt(1);
+        d.setText(Integer.toString(gj));
+        ResultSet customernam2 = databaseAPI.read("SELECT email from customer where name= \"" + forfname.getText() +"\"");
+        customernam2.next();
+        ll.setText(customernam2.getString(1));
+
     }
 }
