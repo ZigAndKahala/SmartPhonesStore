@@ -22,7 +22,7 @@
                <content>
                   <AnchorPane fx:id="addPhone">
                      <children>
-                        <TextField fx:id="phoneName" layoutX="27.0" layoutY="72.0" prefHeight="65.0" prefWidth="467.0" promptText="Phone Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                        <TextField fx:id="name" layoutX="27.0" layoutY="72.0" prefHeight="65.0" prefWidth="467.0" promptText="Phone Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font size="30.0" />
                            </font>

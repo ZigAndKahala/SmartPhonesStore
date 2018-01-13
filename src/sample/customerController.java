@@ -41,6 +41,12 @@ public class customerController {
     public TableColumn acessBuyDateClmn;
     public Button viewPhoneButton;
     public Button viewAcessButton;
+    public TableView phoneReserves;
+    public TableColumn PRC;
+    public TableColumn PDC;
+    public TableView accessoryReserves;
+    public TableColumn ARC;
+    public TableColumn ADC;
     private int cid;
 
     public Label releaseDate;
@@ -469,13 +475,7 @@ public class customerController {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
         ResultSet resultSet = databaseAPI.read("SELECT pid,yid FROM buyphone WHERE cid = " + cid);
-        while (resultSet.next()){
-            ResultSet phoneName = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + resultSet.getInt(1));
-            phoneName.next();
-            ResultSet dayOfPayment = databaseAPI.read("SELECT dateOfPayment FROM payment WHERE yid = " + resultSet.getInt(2));
-            dayOfPayment.next();
-            phonePurchase.add(new phonePurchase(phoneName.getString(1) + " " + phoneName.getString(2),dayOfPayment.getString(1)));
-        }
+        getPhoneData(phonePurchase, databaseAPI, resultSet);
 
         return phonePurchase;
     }
@@ -486,15 +486,63 @@ public class customerController {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
         ResultSet resultSet = databaseAPI.read("SELECT otherId,yid FROM buyothers WHERE cid = " + cid);
+        getAccessData(acessPurchase, databaseAPI, resultSet);
+
+        return acessPurchase;
+    }
+
+    private ObservableList<phonePurchase> setPhoneReserves() throws SQLException, ClassNotFoundException {
+        ObservableList<phonePurchase> phoneReserves = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT pid,reserveDate FROM reservephone WHERE cid = " + cid);
+        while (resultSet.next()){
+            ResultSet phoneName = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + resultSet.getInt(1));
+            phoneName.next();
+            String dateOfReserve = resultSet.getString(2);
+            dateOfReserve = dateOfReserve.split("-")[0] + "-" + Integer.valueOf(dateOfReserve.split("-")[1]) + 3 + "-" + dateOfReserve.split("-")[2];
+            phoneReserves.add(new phonePurchase(phoneName.getString(1) + " " + phoneName.getString(2),dateOfReserve));
+        }
+
+        return phoneReserves;
+    }
+
+    private ObservableList<accessoryPurchase> setAcessReserves() throws SQLException, ClassNotFoundException {
+        ObservableList<accessoryPurchase> acessReserves = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT otherId,reserveDate FROM reserveothers WHERE cid = " + cid);
+        while (resultSet.next()){
+            ResultSet acessName = databaseAPI.read("SELECT name,type FROM others WHERE otherId = " + resultSet.getInt(1));
+            acessName.next();
+            String dateOfReserve = resultSet.getString(2);
+            dateOfReserve = dateOfReserve.split("-")[0] + "-" + Integer.valueOf(dateOfReserve.split("-")[1]) + 3 + "-" + dateOfReserve.split("-")[2];
+            acessReserves.add(new accessoryPurchase(acessName.getString(1) + " | " + acessName.getString(2),dateOfReserve));
+        }
+
+        return acessReserves;
+    }
+
+    private void getAccessData(ObservableList<accessoryPurchase> acessReserves, DatabaseAPI databaseAPI, ResultSet resultSet) throws SQLException {
         while (resultSet.next()){
             ResultSet acessName = databaseAPI.read("SELECT name,type FROM others WHERE otherId = " + resultSet.getInt(1));
             acessName.next();
             ResultSet dayOfPayment = databaseAPI.read("SELECT dateOfPayment FROM payment WHERE yid = " + resultSet.getInt(2));
             dayOfPayment.next();
-            acessPurchase.add(new accessoryPurchase(acessName.getString(1) + " | " + acessName.getString(2),dayOfPayment.getString(1)));
+            acessReserves.add(new accessoryPurchase(acessName.getString(1) + " | " + acessName.getString(2),dayOfPayment.getString(1)));
         }
+    }
 
-        return acessPurchase;
+    private void getPhoneData(ObservableList<phonePurchase> phoneReserves, DatabaseAPI databaseAPI, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()){
+            ResultSet phoneName = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + resultSet.getInt(1));
+            phoneName.next();
+            ResultSet dayOfPayment = databaseAPI.read("SELECT dateOfPayment FROM payment WHERE yid = " + resultSet.getInt(2));
+            dayOfPayment.next();
+            phoneReserves.add(new phonePurchase(phoneName.getString(1) + " " + phoneName.getString(2),dayOfPayment.getString(1)));
+        }
     }
 
     public void selectionChanged(Event event) throws SQLException, ClassNotFoundException {
@@ -507,11 +555,22 @@ public class customerController {
         acsPurchase.setItems(setAcessPurchase());
     }
 
+
     public void showAccessories(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
         showAvailableAccessories();
     }
 
     public void showPhones(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
         showAvailablePhones();
+    }
+
+    public void setReserveData(Event event) throws SQLException, ClassNotFoundException {
+        PRC.setCellValueFactory(new PropertyValueFactory("name"));
+        PDC.setCellValueFactory(new PropertyValueFactory("date"));
+        phoneReserves.setItems(setPhoneReserves());
+
+        ARC.setCellValueFactory(new PropertyValueFactory("name"));
+        ADC.setCellValueFactory(new PropertyValueFactory("date"));
+        accessoryReserves.setItems(setAcessReserves());
     }
 }

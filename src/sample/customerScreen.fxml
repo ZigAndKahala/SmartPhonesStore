@@ -216,16 +216,20 @@
                   </Pane>
                   </content>
               </Tab>
-              <Tab text="your reserve's">
+              <Tab onSelectionChanged="#setReserveData" text="your reserve's">
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="1033.0" prefWidth="1920.0">
+                        <TableView fx:id="phoneReserves" prefHeight="1033.0" prefWidth="960.0">
                            <columns>
-                              <TableColumn prefWidth="480.0" text="Phones" />
-                              <TableColumn prefWidth="480.0" text="End date of reserve " />
-                              <TableColumn prefWidth="480.0" text="Accessories" />
-                              <TableColumn prefWidth="480.0" text="End date of reserve " />
+                              <TableColumn fx:id="PRC" prefWidth="480.0" text="Phones" />
+                              <TableColumn fx:id="PDC" prefWidth="480.0" text="End date of reserve " />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="accessoryReserves" layoutX="960.0" prefHeight="1033.0" prefWidth="960.0">
+                           <columns>
+                              <TableColumn fx:id="ARC" prefWidth="480.0" text="Accessories" />
+                              <TableColumn fx:id="ADC" prefWidth="480.0" text="End date of reserve " />
                            </columns>
                         </TableView>
                      </children>
