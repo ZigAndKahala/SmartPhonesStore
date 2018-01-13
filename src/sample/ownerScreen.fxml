@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ownerController">
+<AnchorPane fx:id="rootPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ownerController">
    <children>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <tabs>
@@ -45,12 +45,12 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="number" onKeyReleased="#editingNumber" layoutX="694.0" layoutY="195.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
+                        <TextField fx:id="number" layoutX="694.0" layoutY="195.0" onKeyReleased="#editingNumber" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="email" onKeyReleased="#editingEmail" layoutX="633.0" layoutY="262.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
+                        <TextField fx:id="email" layoutX="633.0" layoutY="262.0" onKeyReleased="#editingEmail" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -92,7 +92,7 @@
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="street" layoutX="817.0" layoutY="714.0"  prefHeight="56.0" prefWidth="549.0" promptText="Optional" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="800.0">
+                        <TextField fx:id="street" layoutX="817.0" layoutY="714.0" prefHeight="56.0" prefWidth="549.0" promptText="Optional" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="800.0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -107,7 +107,31 @@
                   </AnchorPane>
                </content>
           </Tab>
-          <Tab text="Set Salary">
+          <Tab text="Delete Employee">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <Label layoutX="28.0" layoutY="27.0" text="Delete Employee" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="189.0" layoutY="232.0" text="Select Employee" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="employees1" layoutX="571.0" layoutY="209.0" onMouseClicked="#setEmployeeList" prefHeight="50.0" prefWidth="400.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="200.0" />
+                        <Button layoutX="175.0" layoutY="422.0" mnemonicParsing="false" onAction="#deleteemployee" prefWidth="300.0" text="Delete" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab onSelectionChanged="#calculateTotalSalary" text="Salary info">
                <content>
                   <AnchorPane>
                      <children>
@@ -142,20 +166,25 @@
                               <Font size="29.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="851.0" layoutY="662.0" mnemonicParsing="false" text="clear" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="192.0">
-                           <font>
-                              <Font size="40.0" />
-                           </font>
-                        </Button>
                         <Button layoutX="1349.0" layoutY="759.0" mnemonicParsing="false" onAction="#addSalary" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
                            <font>
                               <Font size="40.0" />
                            </font>
                         </Button>
+                        <Label fx:id="totalsalaryis" layoutX="539.0" layoutY="618.0" text="0" AnchorPane.leftAnchor="800.0">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="138.0" layoutY="618.0" text="Total Salary Of employees Is" AnchorPane.leftAnchor="20.0">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
-          </Tab>
+            </Tab>
             <Tab text="Inventory">
                <content>
                   <AnchorPane>

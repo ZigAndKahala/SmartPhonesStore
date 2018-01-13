@@ -85,7 +85,7 @@ public class employeeController {
     public DatePicker startDate;
 
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    ObservableList<String> mainTypeList = FXCollections.observableArrayList("Cases","Smart Watches","Bluetooth Headsets","Cables & Adapters","Screen Protectors","Chargers & Cradles","Bluetooth Portable Speakers","Car Mounts","Batteries","Screen Digitizers");
+    ObservableList<String> mainTypeList = FXCollections.observableArrayList("Cases","SmartWatches","Bluetooth Headsets","Cables&Adapters","ScreenProtectors","Chargers&Cradles","BluetoothPortableSpeakers","CarMounts","Batteries","ScreenDigitizers");
     private boolean isImageLinkValid;
 
     public void initialize(){
@@ -175,7 +175,7 @@ public class employeeController {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Info");
-            alert.setContentText("Your is already exist so we just UPDATE data for this type of phone");
+            alert.setContentText("Your phone is already exist so we just UPDATE data for this type of phone");
             alert.showAndWait();
         }
         else {
@@ -262,8 +262,13 @@ public class employeeController {
             }
             if(!accessoryRetialPrice.getText().equals("")){
                 int retial = Integer.parseInt(accessoryRetialPrice.getText());
-                databaseAPI.write("UPDATE phone SET retailPrice = " + retial + " WHERE otherID = " + otherId);
+                databaseAPI.write("UPDATE others SET retailPrice  = " + retial + " WHERE otherID = " + otherId);
             }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setContentText("Your Accessory is already exist so we just UPDATE data for this type of accessory");
+            alert.showAndWait();
 
         }
         else {
@@ -338,6 +343,7 @@ public class employeeController {
 
     public void addProductPhone(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         int count=0;
+        int quan=0;
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
@@ -345,12 +351,18 @@ public class employeeController {
         maxpid.next();
         int mpid = maxpid.getInt("max(pid)");
         String[] phonesH = new String[mpid];
-        ResultSet phname = databaseAPI.read("SELECT name from phone;");
-        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone;");
+        ResultSet phname = databaseAPI.read("SELECT name from phone where imageLink IS NOT NULL");
+        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone where imageLink IS NOT NULL");
         while(phname.next() && phVersion.next())
         {
+            quan=0;
+            ResultSet qqq = databaseAPI.read("SELECT quantity from phone  WHERE name =\"" + phname.getString("name") +"\" && phoneVersion = \"" + phVersion.getString(1) + "\"" );
+            qqq.next();
+            quan=qqq.getInt(1);
+            if(quan > 0 ){
             phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
             count+=1;
+            }
         }
         ObservableList<String> mainTypeListphone = FXCollections.observableArrayList(phonesH);
         producrIs.setItems(mainTypeListphone);
@@ -358,7 +370,7 @@ public class employeeController {
     }
 
     public void addProductAccessory(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        int count=0,i;
+        int count=0,i,quan=0;
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
@@ -366,12 +378,18 @@ public class employeeController {
         maxoid.next();
         int moid = maxoid.getInt("max(otherId)");
         String[] accessoriesH = new String[moid];
-        ResultSet acname = databaseAPI.read("SELECT name from others;");
-        ResultSet acType = databaseAPI.read("SELECT type from others;");
+        ResultSet acname = databaseAPI.read("SELECT name from others where imageLink IS NOT NULL");
+        ResultSet acType = databaseAPI.read("SELECT type from others where imageLink IS NOT NULL");
         while(acname.next() && acType.next())
         {
+            quan=0;
+            ResultSet qqq = databaseAPI.read("SELECT quantity from others  WHERE name =\"" + acname.getString("name") +"\" && type = \"" + acType.getString(1) + "\"" );
+            qqq.next();
+            quan=qqq.getInt(1);
+            if(quan > 0 ){
             accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
             count+=1;
+            }
         }
         ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(accessoriesH);
         producrIs.setItems(mainTypeListaccessories);
@@ -403,7 +421,7 @@ public class employeeController {
     }
 
     public void addProductPhone1(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        int count=0;
+        int count=0,quan=0;
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
@@ -411,12 +429,18 @@ public class employeeController {
         maxpid.next();
         int mpid = maxpid.getInt("max(pid)");
         String[] phonesH = new String[mpid];
-        ResultSet phname = databaseAPI.read("SELECT name from phone;");
-        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone;");
+        ResultSet phname = databaseAPI.read("SELECT name from phone where imageLink IS NOT NULL");
+        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone where imageLink IS NOT NULL");
         while(phname.next() && phVersion.next())
         {
-            phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
-            count+=1;
+            quan=0;
+            ResultSet qqq = databaseAPI.read("SELECT quantity from phone  WHERE name =\"" + phname.getString("name") +"\" && phoneVersion = \"" + phVersion.getString(1) + "\"" );
+            qqq.next();
+            quan=qqq.getInt(1);
+            if(quan > 0 ) {
+                phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
+                count += 1;
+            }
         }
         ObservableList<String> mainTypeListphone = FXCollections.observableArrayList(phonesH);
         producrIs1.setItems(mainTypeListphone);
@@ -424,7 +448,7 @@ public class employeeController {
     }
 
     public void addProductAccessory1(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        int count=0,i;
+        int count=0,i,quan=0;
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
@@ -432,12 +456,18 @@ public class employeeController {
         maxoid.next();
         int moid = maxoid.getInt("max(otherId)");
         String[] accessoriesH = new String[moid];
-        ResultSet acname = databaseAPI.read("SELECT name from others;");
-        ResultSet acType = databaseAPI.read("SELECT type from others;");
+        ResultSet acname = databaseAPI.read("SELECT name from others where imageLink IS NOT NULL");
+        ResultSet acType = databaseAPI.read("SELECT type from others where imageLink IS NOT NULL");
         while(acname.next() && acType.next())
         {
-            accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
-            count+=1;
+            quan=0;
+            ResultSet qqq = databaseAPI.read("SELECT quantity from others  WHERE name =\"" + acname.getString("name") +"\" && type = \"" + acType.getString(1) + "\"" );
+            qqq.next();
+            quan=qqq.getInt(1);
+            if(quan > 0 ){
+                accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
+                count+=1;
+            }
         }
         ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(accessoriesH);
         producrIs1.setItems(mainTypeListaccessories);
@@ -452,7 +482,7 @@ public class employeeController {
 
         if(phoneRadioButton1.isSelected()) {
             List<String> parameters = new ArrayList<>();
-            String phoneName2 = (String) producrIs.getValue();
+            String phoneName2 = (String) producrIs1.getValue();
             String phoneName = phoneName2.split(" ")[0];
             String phoneTypp = phoneName2.split(" ")[1];
             parameters.add(phoneName);
@@ -466,7 +496,7 @@ public class employeeController {
             databaseAPI.write("INSERT INTO phone " + DatabaseAPI.generateSqlCommand("name,phoneVersion,wholesalePrice,retailPrice,Quantity,addedDate", parameters));
         }else {
             List<String> parameters = new ArrayList<>();
-            String accessoryFullName = (String) producrIs.getValue();
+            String accessoryFullName = (String) producrIs1.getValue();
             String accessoryFirstName = accessoryFullName.split(" ")[0];
             String accessorysecondName = accessoryFullName.split(" ")[1];
             parameters.add(accessoryFirstName);
@@ -487,7 +517,7 @@ public class employeeController {
 
 
     public void addProductPhone2(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        int count=0;
+        int count=0,quan=0;
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
@@ -495,12 +525,18 @@ public class employeeController {
         maxpid.next();
         int mpid = maxpid.getInt("max(pid)");
         String[] phonesH = new String[mpid];
-        ResultSet phname = databaseAPI.read("SELECT name from phone;");
-        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone;");
+        ResultSet phname = databaseAPI.read("SELECT name from phone where imageLink IS NOT NULL");
+        ResultSet phVersion = databaseAPI.read("SELECT phoneVersion from phone where imageLink IS NOT NULL");
         while(phname.next() && phVersion.next())
         {
-            phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
-            count+=1;
+            quan=0;
+            ResultSet qqq = databaseAPI.read("SELECT quantity from phone  WHERE name =\"" + phname.getString("name") +"\" && phoneVersion = \"" + phVersion.getString(1) + "\"" );
+            qqq.next();
+            quan=qqq.getInt(1);
+            if(quan > 0 ) {
+                phonesH[count] = phname.getString("name") + " " + phVersion.getString(1);
+                count += 1;
+            }
         }
         ObservableList<String> mainTypeListphone = FXCollections.observableArrayList(phonesH);
         producrIs2.setItems(mainTypeListphone);
@@ -508,7 +544,7 @@ public class employeeController {
     }
 
     public void addProductAccessory2(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        int count=0,i;
+        int count=0,i,quan=0;
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
@@ -516,33 +552,39 @@ public class employeeController {
         maxoid.next();
         int moid = maxoid.getInt("max(otherId)");
         String[] accessoriesH = new String[moid];
-        ResultSet acname = databaseAPI.read("SELECT name from others;");
-        ResultSet acType = databaseAPI.read("SELECT type from others;");
+        ResultSet acname = databaseAPI.read("SELECT name from others where imageLink IS NOT NULL");
+        ResultSet acType = databaseAPI.read("SELECT type from others where imageLink IS NOT NULL");
         while(acname.next() && acType.next())
         {
-            accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
-            count+=1;
+            quan=0;
+            ResultSet qqq = databaseAPI.read("SELECT quantity from others  WHERE name =\"" + acname.getString("name") +"\" && type = \"" + acType.getString(1) + "\"" );
+            qqq.next();
+            quan=qqq.getInt(1);
+            if(quan > 0 ){
+                accessoriesH[count] =acname.getString("name") + " " + acType.getString(1);
+                count+=1;
+            }
         }
         ObservableList<String> mainTypeListaccessories = FXCollections.observableArrayList(accessoriesH);
-        producrIs1.setItems(mainTypeListaccessories);
+        producrIs2.setItems(mainTypeListaccessories);
     }
     public void deletePhone(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
 
 
-        if(phoneRadioButton1.isSelected()) {
+        if(phoneRadioButton2.isSelected()) {
             int q=0;
-            String phoneName2 = (String) producrIs.getValue();
+            String phoneName2 = (String) producrIs2.getValue();
             String phoneName = phoneName2.split(" ")[0];
             String phoneTypp = phoneName2.split(" ")[1];
             ResultSet resultSet00 = databaseAPI.read("select pid from phone where name = \"" + phoneName +  "\" && phoneVersion = \"" + phoneTypp + "\"" + " && imageLink IS NOT NULL");
-            resultSet00.next();
-            int pid = resultSet00.getInt(1);
-
-            databaseAPI.write("UPDATE phone SET quantity = " + q + " WHERE pid = " + pid);
+           if(resultSet00.next()) {
+               int pid = resultSet00.getInt(1);
+               databaseAPI.write("UPDATE phone SET quantity = " + q + " WHERE pid = " + pid);
+           }
         }else {
-            String accessoryFullName = (String) producrIs.getValue();
+            String accessoryFullName = (String) producrIs2.getValue();
             String accessoryFirstName = accessoryFullName.split(" ")[0];
             String accessorysecondName = accessoryFullName.split(" ")[1];
             ResultSet resultSet00 = databaseAPI.read("select otherId from others where name = \"" + accessoryFirstName +  "\" && type = \"" + accessorysecondName + "\"" + " && imageLink IS NOT NULL");

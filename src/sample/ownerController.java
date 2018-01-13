@@ -3,6 +3,7 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,6 +29,8 @@ public class ownerController {
     public TextField street;
     public AnchorPane rootPane;
     public ChoiceBox type;
+    public ChoiceBox employees1;
+    public Label totalsalaryis;
     private int oid;
 
     public TextField name;
@@ -103,6 +106,14 @@ public class ownerController {
         databaseAPI.write("UPDATE salary SET eid = " + ee + " WHERE sid = " + sid );
         databaseAPI.write("UPDATE salary SET oid = " + oid + " WHERE sid = " + sid );
 
+        DatabaseAPI databaseAPI1 = new DatabaseAPI();
+        double tot=0,take=0;
+        ResultSet salary = databaseAPI1.read("SELECT salaryAmount FROM salary");
+        while(salary.next()){
+            take=salary.getDouble(1);
+            tot+=take;
+        }
+        totalsalaryis.setText(Double.toString(tot));
         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
         alert1.setTitle("Info");
         alert1.setContentText("Done ^_^");
@@ -206,13 +217,52 @@ public class ownerController {
 
         List<String> employeesNames = new ArrayList<>();
         ResultSet emname = databaseAPI.read("SELECT name from employee;");
-        while(emname.next())
-            employeesNames.add(emname.getString("name"));
-
+        while(emname.next()) {
+            ResultSet eId = databaseAPI.read("SELECT eid FROM employee where name= \"" + emname.getString("name") +"\"");
+            eId.next();
+            int eee=eId.getInt(1);
+            if(eee != 100000)
+             employeesNames.add(emname.getString("name"));
+        }
         employees.setItems(FXCollections.observableArrayList(employeesNames));
+        employees1.setItems(FXCollections.observableArrayList(employeesNames));
+
     }
 
     public void setEmployeeList(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
         setEmployeesName();
+    }
+
+    public void deleteemployee(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String empnameis= (String) employees1.getValue();
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        ResultSet eId = databaseAPI.read("SELECT eid FROM employee where name= \"" + empnameis +"\"");
+        eId.next();
+        int eeid = eId.getInt(1);
+        double q = 100000;
+        databaseAPI.write("DELETE FROM salary WHERE eid = " + eeid );
+        databaseAPI.write("UPDATE employee SET eid = " + q + " WHERE eid = " + eeid );
+
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setContentText("Done ^_^ ");
+        alert.showAndWait();
+
+
+
+
+    }
+
+    public void calculateTotalSalary(Event event) throws SQLException, ClassNotFoundException {
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        double tot=0,take=0;
+        ResultSet salary = databaseAPI.read("SELECT salaryAmount FROM salary");
+        while(salary.next()){
+            take=salary.getDouble(1);
+            tot+=take;
+        }
+        totalsalaryis.setText(Double.toString(tot));
+
     }
 }
