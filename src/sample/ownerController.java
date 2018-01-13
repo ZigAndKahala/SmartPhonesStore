@@ -265,6 +265,29 @@ public class ownerController {
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
         //TODO : here
+        ResultSet resultSet = databaseAPI.read("SELECT pid,yid from buyphone");
+        while (resultSet.next()){
+            ResultSet phoneData = databaseAPI.read("Select name,phoneVersion from phone where pid = " + resultSet.getInt(1));
+            phoneData.next();
+            ResultSet paymentData = databaseAPI.read("Select paidAmount,dateOfPayment from payment where yid = " + resultSet.getInt(2));
+            paymentData.next();
+            selling.add(new Selling(phoneData.getString(1) + " " + phoneData.getString(2),
+                    paymentData.getString(2),
+                    "1",
+                    paymentData.getString(1)));
+        }
+
+        resultSet = databaseAPI.read("SELECT otherId,yid from buyother");
+        while (resultSet.next()){
+            ResultSet phoneData = databaseAPI.read("Select name,type from others where otherID = " + resultSet.getInt(1));
+            phoneData.next();
+            ResultSet paymentData = databaseAPI.read("Select paidAmount,dateOfPayment from payment where yid = " + resultSet.getInt(2));
+            paymentData.next();
+            selling.add(new Selling(phoneData.getString(1) + " " + phoneData.getString(2),
+                    paymentData.getString(2),
+                    "1",
+                    paymentData.getString(1)));
+        }
 //        ResultSet resultSet = databaseAPI.read("SELECT pid,yid FROM buyphone");
 //        while (resultSet.next()){
 //            ResultSet phoneData = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + resultSet.getInt(1));
@@ -290,9 +313,9 @@ public class ownerController {
 
         DatabaseAPI databaseAPI = new DatabaseAPI();
 
-        ResultSet resultSet = databaseAPI.read("SELECT pid,name,email,mobileNumber,type FROM employee;");
+        ResultSet resultSet = databaseAPI.read("SELECT eid,name,email,mobileNumber,type FROM employee;");
         while (resultSet.next()){
-            ResultSet hasSalary = databaseAPI.read("SELECT sid FROM salary where pid = " + resultSet.getInt(1));
+            ResultSet hasSalary = databaseAPI.read("SELECT sid FROM salary where eid = " + resultSet.getInt(1));
             Boolean isWorking = hasSalary.next();
 
             String working;
@@ -300,6 +323,7 @@ public class ownerController {
                 working = "Working";
             else
                 working = "Not Working";
+
             employees.add(new EmployeeTable(resultSet.getString(2),resultSet.getString(3),String.valueOf(resultSet.getInt(4)),resultSet.getString(5),working));
         }
 

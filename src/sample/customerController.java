@@ -258,14 +258,14 @@ public class customerController {
 
         paymentData.add(dateFormat.format(date));
 
-        if(promotion.isVisible())
-            paymentData.add(String.valueOf(phonePrice*(PpromoValue/100)));
-        else
-            paymentData.add(String.valueOf(phonePrice));
+//        if(promotion.isVisible())
+//            paymentData.add(String.valueOf(phonePrice*(PpromoValue/100)));
+//        else
+//            paymentData.add(String.valueOf(phonePrice));
+//
+//        paymentData.add(dateFormat.format(date));
 
-        paymentData.add(dateFormat.format(date));
-
-        databaseAPI.write("Insert Into payment (paidAmount,dateOfPayment,actualPaidAmount,dateOfActualPayment) Values " + DatabaseAPI.convertToSqlFormat(paymentData));
+        databaseAPI.write("Insert Into payment (paidAmount,dateOfPayment) Values " + DatabaseAPI.convertToSqlFormat(paymentData));
 
         ResultSet paymentId = databaseAPI.read("Select max(yid) From payment");
         paymentId.next();
@@ -380,18 +380,18 @@ public class customerController {
         if(acsPromotion.isVisible())
             paymentData.add(String.valueOf(accessoryPrice*(ApromoValue/100)));
         else
-            paymentData.add(acsPrice.getText());
+            paymentData.add(String.valueOf(accessoryPrice));
 
         paymentData.add(String.valueOf(dateFormat.format(date)));
 
-        if(acsPromotion.isVisible())
-            paymentData.add(String.valueOf(accessoryPrice*(ApromoValue/100)));
-        else
-            paymentData.add(acsPrice.getText());
+//        if(acsPromotion.isVisible())
+//            paymentData.add(String.valueOf(accessoryPrice*(ApromoValue/100)));
+//        else
+//            paymentData.add(acsPrice.getText());
+//
+//        paymentData.add(String.valueOf(dateFormat.format(date)));
 
-        paymentData.add(String.valueOf(dateFormat.format(date)));
-
-        databaseAPI.write("Insert Into payment (paidAmount,dateOfPayment,actualPaidAmount,dateOfActualPayment) Values " + DatabaseAPI.convertToSqlFormat(paymentData));
+        databaseAPI.write("Insert Into payment (paidAmount,dateOfPayment) Values " + DatabaseAPI.convertToSqlFormat(paymentData));
 
         ResultSet paymentId = databaseAPI.read("Select max(yid) From payment");
         paymentId.next();

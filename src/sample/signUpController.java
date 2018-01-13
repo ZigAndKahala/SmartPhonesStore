@@ -1,10 +1,12 @@
 package sample;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -138,5 +140,10 @@ public class signUpController {
     private Boolean isAllRequiredFieldsFilled(){
         return !name.getText().equals("") && !email.getText().equals("") && !phoneNumber.getText().equals("") &&
                 !password.getText().equals("") && date != null && city.getSelectionModel().getSelectedIndex() != -1;
+    }
+
+    public void showPassword(MouseEvent mouseEvent) {
+    // Todo
+//        password.
     }
 }
