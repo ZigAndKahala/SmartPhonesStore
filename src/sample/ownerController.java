@@ -8,8 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -31,6 +33,9 @@ public class ownerController {
     public ChoiceBox type;
     public ChoiceBox employees1;
     public Label totalsalaryis;
+    public TableView customertable;
+    public Label totalcustomer;
+    public TableColumn customm;
     private int oid;
 
     public TextField name;
@@ -264,5 +269,36 @@ public class ownerController {
         }
         totalsalaryis.setText(Double.toString(tot));
 
+    }
+
+    public void settotalcustomer(Event event) throws SQLException, ClassNotFoundException {
+
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+        int take=0;
+        ResultSet salary = databaseAPI.read("SELECT cid FROM customer");
+        while(salary.next()){
+            take+=1;
+        }
+        totalcustomer.setText(Integer.toString(take));
+    }
+    private ObservableList<customernametable> setcustomname() throws SQLException, ClassNotFoundException {
+        ObservableList<customernametable> customernametabl = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT cid FROM customer");
+        while (resultSet.next()){
+            ResultSet customernam = databaseAPI.read("SELECT name WHERE cid = " + resultSet.getInt(1));
+            customernam.next();
+            customernametabl.add(new customernametable(customernam.getString(1) ));
+        }
+
+        return customernametabl;
+    }
+
+    public void sssssss(TouchEvent touchEvent) throws SQLException, ClassNotFoundException {
+        customm.setCellValueFactory(new PropertyValueFactory("custom"));
+        customertable.setItems(setcustomname());
     }
 }
