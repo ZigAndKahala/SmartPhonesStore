@@ -45,12 +45,12 @@
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="number" onKeyReleased="#editingNumber" layoutX="694.0" layoutY="195.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
+                        <TextField fx:id="number" layoutX="694.0" layoutY="195.0" onKeyReleased="#editingNumber" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="email" onKeyReleased="#editingEmail" layoutX="633.0" layoutY="262.0" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
+                        <TextField fx:id="email" layoutX="633.0" layoutY="262.0" onKeyReleased="#editingEmail" prefHeight="38.0" prefWidth="656.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -92,7 +92,7 @@
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="street" layoutX="817.0" layoutY="714.0"  prefHeight="56.0" prefWidth="549.0" promptText="Optional" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="800.0">
+                        <TextField fx:id="street" layoutX="817.0" layoutY="714.0" prefHeight="56.0" prefWidth="549.0" promptText="Optional" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="800.0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -156,29 +156,46 @@
                   </AnchorPane>
                </content>
           </Tab>
-            <Tab text="Inventory">
+            <Tab onSelectionChanged="#setInventory" text="Inventory">
                <content>
                   <AnchorPane>
                      <children>
                         <TableView fx:id="incomingTable" prefHeight="1060.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="240.0" text="Incomings" />
-                            <TableColumn prefWidth="240.0" text="Date" />
-                              <TableColumn prefWidth="240.0" text="Quantity" />
-                              <TableColumn prefWidth="240.0" text="Price" />
+                            <TableColumn fx:id="incomingC" prefWidth="240.0" text="Incomings" />
+                            <TableColumn fx:id="incomingDateC" prefWidth="240.0" text="Date" />
+                              <TableColumn fx:id="incomingQuantityC" prefWidth="240.0" text="Quantity" />
+                              <TableColumn fx:id="incomingPriceC" prefWidth="240.0" text="Price" />
                           </columns>
                         </TableView>
                         <TableView fx:id="sellingTable" prefHeight="1060.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
-                              <TableColumn prefWidth="240.0" text="Sellings" />
-                              <TableColumn prefWidth="240.0" text="Date" />
-                              <TableColumn prefWidth="240.0" text="Quantity" />
-                              <TableColumn prefWidth="240.0" text="Price" />
+                              <TableColumn fx:id="sellingC" prefWidth="240.0" text="Sellings" />
+                              <TableColumn fx:id="sellingDateC" prefWidth="240.0" text="Date" />
+                              <TableColumn fx:id="sellingQuantityC" prefWidth="240.0" text="Quantity" />
+                              <TableColumn fx:id="sellingPriceC" prefWidth="240.0" text="Price" />
                            </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
                </content>
+            </Tab>
+            <Tab onSelectionChanged="#setEmployeeTable" text="Employee List">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="employeeTable" prefHeight="1033.0" prefWidth="1920.0">
+                          <columns>
+                            <TableColumn fx:id="nameC" prefWidth="384.0" text="Name" />
+                            <TableColumn fx:id="emailC" prefWidth="384.0" text="Email" />
+                              <TableColumn fx:id="numberC" prefWidth="384.0" text="Mobile Number" />
+                              <TableColumn fx:id="typeC" prefWidth="384.0" text="Type" />
+                              <TableColumn fx:id="isWorkingC" prefWidth="384.0" text="Is Working" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
         </tabs>
       </TabPane>

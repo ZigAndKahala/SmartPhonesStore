@@ -3,10 +3,12 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +30,20 @@ public class ownerController {
     public TextField street;
     public AnchorPane rootPane;
     public ChoiceBox type;
+    public TableColumn incomingC;
+    public TableColumn incomingDateC;
+    public TableColumn incomingQuantityC;
+    public TableColumn incomingPriceC;
+    public TableColumn sellingC;
+    public TableColumn sellingDateC;
+    public TableColumn sellingQuantityC;
+    public TableColumn sellingPriceC;
+    public TableView employeeTable;
+    public TableColumn nameC;
+    public TableColumn emailC;
+    public TableColumn numberC;
+    public TableColumn typeC;
+    public TableColumn isWorkingC;
     private int oid;
 
     public TextField name;
@@ -214,5 +230,79 @@ public class ownerController {
 
     public void setEmployeeList(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
         setEmployeesName();
+    }
+
+    public void setInventory(Event event) {
+    }
+
+    private ObservableList<Incoming> setIncoming() throws SQLException, ClassNotFoundException {
+        ObservableList<Incoming> incoming = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT name,phoneVersion,addedDate,quantity,price FROM phone");
+        while (resultSet.next()){
+            incoming.add(new Incoming(resultSet.getString(1) + " " + resultSet.getString(2),
+                    resultSet.getString(3),
+                    String.valueOf(resultSet.getInt(4)),
+                    String.valueOf(resultSet.getDouble(5))));
+        }
+
+        resultSet = databaseAPI.read("SELECT name,type,addedDate,quantity,price FROM others");
+        while (resultSet.next()){
+            incoming.add(new Incoming(resultSet.getString(1) + " " + resultSet.getString(2),
+                    resultSet.getString(3),
+                    String.valueOf(resultSet.getInt(4)),
+                    String.valueOf(resultSet.getDouble(5))));
+        }
+
+        return incoming;
+    }
+
+    private ObservableList<Selling> setSelling() throws SQLException, ClassNotFoundException {
+        ObservableList<Selling> selling = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        //TODO : here
+//        ResultSet resultSet = databaseAPI.read("SELECT pid,yid FROM buyphone");
+//        while (resultSet.next()){
+//            ResultSet phoneData = databaseAPI.read("SELECT name,phoneVersion FROM phone WHERE pid = " + resultSet.getInt(1));
+//            phoneData.next();
+//            ResultSet paymentData = databaseAPI.read("SELECT ")
+//            selling.add(new Selling())
+//        }
+
+        return selling;
+    }
+
+    public void setEmployeeTable(Event event) throws SQLException, ClassNotFoundException {
+        nameC.setCellValueFactory(new PropertyValueFactory("name"));
+        emailC.setCellValueFactory(new PropertyValueFactory("email"));
+        numberC.setCellValueFactory(new PropertyValueFactory("number"));
+        typeC.setCellValueFactory(new PropertyValueFactory("type"));
+        isWorkingC.setCellValueFactory(new PropertyValueFactory("isWorking"));
+        employeeTable.setItems(setEmployee());
+    }
+
+    private ObservableList<EmployeeTable> setEmployee() throws SQLException, ClassNotFoundException {
+        ObservableList<EmployeeTable> employees = FXCollections.observableArrayList();
+
+        DatabaseAPI databaseAPI = new DatabaseAPI();
+
+        ResultSet resultSet = databaseAPI.read("SELECT pid,name,email,mobileNumber,type FROM employee;");
+        while (resultSet.next()){
+            ResultSet hasSalary = databaseAPI.read("SELECT sid FROM salary where pid = " + resultSet.getInt(1));
+            Boolean isWorking = hasSalary.next();
+
+            String working;
+            if (isWorking)
+                working = "Working";
+            else
+                working = "Not Working";
+            employees.add(new EmployeeTable(resultSet.getString(2),resultSet.getString(3),String.valueOf(resultSet.getInt(4)),resultSet.getString(5),working));
+        }
+
+        return employees;
     }
 }
